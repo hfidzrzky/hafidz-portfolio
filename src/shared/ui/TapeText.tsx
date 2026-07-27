@@ -8,7 +8,7 @@ interface TapeTextProps {
 
 export function TapeText({ children, className }: TapeTextProps) {
   return (
-    <span className={cn('inline-block bg-accent text-white tape-effect', className)}>
+    <span className={cn('inline-block max-w-full bg-accent text-white tape-effect', className)}>
       {children}
     </span>
   )

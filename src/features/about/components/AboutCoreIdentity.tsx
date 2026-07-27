@@ -12,7 +12,7 @@ interface AboutCoreIdentityProps {
 
 export function AboutCoreIdentity({ data }: AboutCoreIdentityProps) {
   return (
-    <div className="lg:col-span-5 relative flex flex-col md:pl-16 space-y-8 z-10 lg:sticky lg:top-32">
+    <div className="lg:col-span-5 relative flex flex-col w-full pl-0 md:pl-16 space-y-8 z-10 lg:sticky lg:top-32">
       <div className="space-y-6">
         {/* Subheading Badge */}
         <FadeIn delay={0.1}>
@@ -21,7 +21,7 @@ export function AboutCoreIdentity({ data }: AboutCoreIdentityProps) {
 
         {/* Headline */}
         <FadeIn delay={0.2}>
-          <h2 className="font-sans text-[48px] md:text-[64px] xl:text-[72px] leading-[0.9] font-bold tracking-tight uppercase text-slate-800 dark:text-white">
+          <h2 className="font-sans text-[30px] sm:text-[44px] md:text-[64px] xl:text-[72px] leading-[0.9] font-bold tracking-tight uppercase text-slate-800 dark:text-white">
             {data.headline.line1}
             <br />
             {data.headline.line2}
