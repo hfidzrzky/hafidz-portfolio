@@ -1,8 +1,8 @@
 'use client'
 
 import { FadeIn } from '@/shared/ui/animations/FadeIn'
-import { SectionIndicator } from '@/shared/ui/SectionIndicator'
 import { Badge } from '@/shared/ui/Badge'
+import { DotPattern } from '@/shared/ui/DotPattern'
 import { HeroData } from '../types'
 import { HeroHeadline } from './HeroHeadline'
 import { HeroDescription } from './HeroDescription'
@@ -10,15 +10,12 @@ import { HeroCtaButtons } from './HeroCtaButtons'
 import { EducationCard } from './EducationCard'
 
 interface HeroContentProps {
-  data: HeroData;
+  data: HeroData
 }
 
 export function HeroContent({ data }: HeroContentProps) {
   return (
-    <div className="lg:col-span-6 relative flex pl-0 md:pl-10">
-      {/* Global Section Indicator aligned precisely at far left edge */}
-      <SectionIndicator number={data.sectionNumber} />
-
+    <div className="lg:col-span-6 relative flex pl-0 md:pl-16">
       <div className="space-y-5 z-10 w-full">
         <FadeIn>
           <Badge>{data.badge}</Badge>
@@ -42,6 +39,10 @@ export function HeroContent({ data }: HeroContentProps) {
 
         <FadeIn delay={0.5}>
           <EducationCard education={data.education} />
+        </FadeIn>
+
+        <FadeIn delay={0.6}>
+          <DotPattern cols={3} count={6} className="w-10 mt-8" />
         </FadeIn>
       </div>
     </div>

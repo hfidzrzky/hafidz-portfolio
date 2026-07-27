@@ -14,15 +14,16 @@ export function SectionContainer({
   variant = 'default',
   className,
 }: SectionContainerProps) {
-  const baseStyles = "max-w-[1400px] mx-auto px-6 relative"
+  const baseStyles = "max-w-[1400px] mx-auto px-6 relative scroll-mt-5"
   const variants = {
     hero: "pt-24 pb-12 lg:pt-20 lg:pb-0 min-h-screen lg:h-[100dvh] lg:min-h-[600px] flex items-center",
-    default: "py-20",
+    default: "py-24 lg:py-28 min-h-screen flex items-start",
   }
 
   return (
-    <main id={id} className={cn(baseStyles, variants[variant], className)}>
+    <section id={id} className={cn(baseStyles, variants[variant], className)}>
       {children}
-    </main>
+    </section>
   )
 }
+
