@@ -1,0 +1,5 @@
+## KETIKA REFACTOR
+1. baca kembali summarize yg sudah saya berikan dan sudah saya rancang di [PRD] ini, dan juga baca prd dan pahami secara mendalam untuk prd yg sudah saya buat ini @project-brief.md dan @01-refactor-blueprint.md. untuk saat ini saya ingin mengekstraksi semua logic yg ada di file lab.html dengan maintainable, scalable, readable tentu logicnya tidak redundan dan best practice dari apa yg sudah ada. jangan lgsung generate code, tapi analisis, audit, dan buat implementation plannya sebelum eksekusi kode. laporkan ke saya jika anda benar benar membaca dan memahaminya. agar semua konsisten dari awal hingga akhir!!
+
+## SELESAI REFACTOR
+2. summarize hasil refactor untuk section lab ini, saya ingin melanjutkan di chat baru agar tetap bisa konsisten styling dan melanjutkan section indicatornya untuk section stories nanti. buatkan markdown mentahnya.!

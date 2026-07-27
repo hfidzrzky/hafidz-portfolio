@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import { Navbar } from '@/widgets/navbar/Navbar'
@@ -109,6 +110,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>

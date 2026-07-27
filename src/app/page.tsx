@@ -2,6 +2,7 @@ import { HeroSection } from '@/widgets/home/HeroSection'
 import { AboutSection } from '@/widgets/home/AboutSection'
 import { CurrentlySection } from '@/widgets/home/CurrentlySection'
 import { WorkSection } from '@/widgets/home/WorkSection'
+import { LabSection } from '@/widgets/home/LabSection'
 
 export default function HomePage() {
   return (
@@ -10,8 +11,10 @@ export default function HomePage() {
       <AboutSection />
       <CurrentlySection />
       <WorkSection />
+      <LabSection />
     </main>
   )
 }
+
 
 
