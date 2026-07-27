@@ -4,6 +4,7 @@ import { CurrentlySection } from '@/widgets/home/CurrentlySection'
 import { WorkSection } from '@/widgets/home/WorkSection'
 import { LabSection } from '@/widgets/home/LabSection'
 import { StoriesSection } from '@/widgets/home/StoriesSection'
+import { JourneySection } from '@/widgets/home/JourneySection'
 
 export default function HomePage() {
   return (
@@ -14,9 +15,7 @@ export default function HomePage() {
       <WorkSection />
       <LabSection />
       <StoriesSection />
+      <JourneySection />
     </main>
   )
 }
-
-
-
