@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import { Navbar } from '@/widgets/navbar/Navbar'
+import { Footer } from '@/widgets/footer/Footer'
 import './globals.css'
 
 // 1. Inisialisasi Font
@@ -110,9 +111,11 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Footer />
           <Analytics />
         </Providers>
       </body>
     </html>
   )
 }
+
