@@ -2,7 +2,7 @@
 
 > A personal portfolio documenting what I build, what I learn, what I'm exploring, and where I'm heading as a software engineer.
 
-[Live Portfolio](#) · [LinkedIn](https://linkedin.com/in/hfidzrzky) · [GitHub](https://github.com/hfidzrzky) . [Instagram](https://instagram.com/hfidzrzky_)
+[Live Portfolio](https://muhammadhafidz-portfolio.vercel.app) · [LinkedIn](https://linkedin.com/in/hfidzrzky) · [GitHub](https://github.com/hfidzrzky) . [Instagram](https://instagram.com/hfidzrzky_)
 
 ---
 
