@@ -8,6 +8,7 @@ export const MAIN_NAVIGATION: NavItem[] = [
   { label: 'Work', path: '#work' },
   { label: 'Lab', path: '#lab' },
   { label: 'Stories', path: '#stories' },
+  { label: 'Certificates', path: '#certificates' },
 ]
 
 export const CONTACT_LINK: NavItem = {
