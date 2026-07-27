@@ -15,7 +15,7 @@ interface HeroContentProps {
 
 export function HeroContent({ data }: HeroContentProps) {
   return (
-    <div className="lg:col-span-6 relative flex pl-0 md:pl-16">
+    <div className="lg:col-span-6 relative flex pl-0 md:pl-16 mt-5">
       <div className="space-y-5 z-10 w-full">
         <FadeIn>
           <Badge>{data.badge}</Badge>

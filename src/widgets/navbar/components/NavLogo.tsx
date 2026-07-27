@@ -1,13 +1,20 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function NavLogo() {
   return (
-    <Link href="#hero" className="flex items-center gap-2 group">
-      <div className="flex items-center text-accent font-bold text-2xl tracking-tighter">
-        <span className="mr-1">|</span>H<span className="ml-1">|</span>
+    <Link href="#hero" className="flex items-center gap-5 group">
+      <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:scale-105">
+        <Image
+          src="/favicon.ico"
+          alt="MyPortfolio Logo"
+          width={32}
+          height={32}
+          className="w-full h-full object-contain"
+        />
       </div>
-      <span className="font-bold tracking-widest uppercase text-sm ml-2 text-slate-900 dark:text-white">
-        Hafidz
+      <span className="font-mono text-sm sm:text-base font-bold tracking-widest uppercase text-slate-900 dark:text-white group-hover:text-accent transition-colors">
+        MyPortfolio.
       </span>
     </Link>
   )
