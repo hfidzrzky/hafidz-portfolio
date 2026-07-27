@@ -3,6 +3,7 @@ import { AboutSection } from '@/widgets/home/AboutSection'
 import { CurrentlySection } from '@/widgets/home/CurrentlySection'
 import { WorkSection } from '@/widgets/home/WorkSection'
 import { LabSection } from '@/widgets/home/LabSection'
+import { StoriesSection } from '@/widgets/home/StoriesSection'
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <CurrentlySection />
       <WorkSection />
       <LabSection />
+      <StoriesSection />
     </main>
   )
 }
