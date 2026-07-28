@@ -5,7 +5,7 @@ export interface CertificateItem {
   provider: string
   issuerOrEvent: string
   year: string
-  category?: string
+  category: string
   description: string
   imageUrl: string
   imageAlt: string

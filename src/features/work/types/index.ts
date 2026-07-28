@@ -1,6 +1,6 @@
 export interface ArchitectureViewItem {
   id: string
-  iconName: 'database' | 'dns' | 'server'
+  iconName: 'database' | 'dns' | 'server' | 'code' | 'globe' | 'terminal'
   title: string
 }
 
@@ -17,6 +17,7 @@ export interface ProjectModalData {
   story: string[]
   demoUrl: string
   previewImage: string
+  previewImageCaption?: string
   roleTitle: string
   roleDescription: string
   whyDescription: string
@@ -27,6 +28,7 @@ export interface ProjectModalData {
   scopeGroups: ProjectScopeGroup[]
   repoLink?: string
   isRepoPrivate?: boolean
+  privateNote?: string
 }
 
 export interface ProjectItem {

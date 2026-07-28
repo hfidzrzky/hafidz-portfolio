@@ -38,9 +38,9 @@ export const currentlyMockData: CurrentlyData = {
       iconName: 'architecture',
       statusLabel: 'IN PROGRESS',
       statusType: 'in-progress',
-      title: 'SINEMUS SCREEN',
+      title: 'SINEMUS SCREEN & ECOSYSTEM',
       description:
-        'Building and evolving a digital ecosystem for Muslim cinema — from the product experience to the systems behind it.',
+        'Leading the product engineering for Sinemus Screen (streaming & event screening) while laying the scalable technical foundation powering Sinemus Indonesia\'s multi-platform roadmap.',
     },
     {
       id: 'focus-backend',

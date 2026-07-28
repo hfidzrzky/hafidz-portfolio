@@ -28,9 +28,11 @@ export function StoryCard({ story, index }: StoryCardProps) {
               <div className="lg:col-span-7 relative z-10">
                 <StoryImage
                   imageUrl={story.imageUrl}
+                  images={story.images}
                   imageAlt={story.imageAlt}
                   formattedIndex={formattedIndex}
                   isEven={isEven}
+                  cardIndex={index}
                 />
               </div>
 
@@ -60,9 +62,11 @@ export function StoryCard({ story, index }: StoryCardProps) {
               <div className="lg:col-span-7 relative z-10 order-1 lg:order-2">
                 <StoryImage
                   imageUrl={story.imageUrl}
+                  images={story.images}
                   imageAlt={story.imageAlt}
                   formattedIndex={formattedIndex}
                   isEven={isEven}
+                  cardIndex={index}
                 />
               </div>
             </>

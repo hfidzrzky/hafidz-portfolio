@@ -55,7 +55,7 @@ export function StoriesHeader({ data }: StoriesHeaderProps) {
           <div className="md:col-span-5 lg:col-span-6 flex gap-8 sm:gap-10 md:justify-end font-mono border-t md:border-t-0 border-light-border dark:border-dark-border pt-6 md:pt-0">
             <div className="flex flex-col">
               <span className="text-3xl md:text-5xl text-slate-900 dark:text-white font-bold tracking-tighter">
-                02<span className="text-accent">+</span>
+                {data.recordedEventsCount}<span className="text-accent">+</span>
               </span>
               <span className="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest mt-2">
                 Key Events Recorded

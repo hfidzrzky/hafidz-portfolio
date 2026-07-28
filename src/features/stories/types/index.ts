@@ -18,6 +18,7 @@ export interface StoryItem {
   title: string[]
   description: string
   imageUrl: string
+  images?: string[]
   imageAlt: string
   meta: StoryMeta
 }

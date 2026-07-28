@@ -2,20 +2,30 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { ExternalLink, Eye } from 'lucide-react'
 import { CertificateItem } from '../types'
+import { CategoryBadge } from './CategoryBadge'
 import { FadeIn } from '@/shared/ui/animations/FadeIn'
 
 interface FeaturedCertificateCardProps {
   certificate: CertificateItem
+  onPreview: (certificate: CertificateItem) => void
 }
 
-export function FeaturedCertificateCard({ certificate }: FeaturedCertificateCardProps) {
+export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCertificateCardProps) {
   return (
     <div className="lg:col-span-7">
       <FadeIn delay={0.2} direction="up" className="flex flex-col group">
         {/* Featured Image Box */}
-        <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:max-h-[360px] rounded-xl bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-2 sm:p-2.5 transition-colors duration-500 group-hover:border-accent/50 overflow-hidden mb-6 shadow-sm">
-          {/* Verification Badge */}
+        <div
+          onClick={() => onPreview(certificate)}
+          className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:max-h-[360px] rounded-xl bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-2 sm:p-2.5 transition-all duration-500 group-hover:border-accent/50 overflow-hidden mb-6 shadow-md cursor-pointer"
+        >
+          {/* Category & Verification Badge */}
+          <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+            <CategoryBadge category={certificate.category} />
+          </div>
+
           {certificate.isVerified && (
             <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-light-surface/90 dark:bg-dark-surface/90 backdrop-blur-md border border-light-border dark:border-dark-border px-2.5 py-1 rounded shadow-lg">
               <span className="relative flex h-2 w-2">
@@ -23,7 +33,7 @@ export function FeaturedCertificateCard({ certificate }: FeaturedCertificateCard
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
               </span>
               <span className="font-mono text-[9px] text-slate-800 dark:text-white tracking-widest uppercase font-bold">
-                Verified Marker
+                VERIFIED
               </span>
             </div>
           )}
@@ -38,16 +48,23 @@ export function FeaturedCertificateCard({ certificate }: FeaturedCertificateCard
               unoptimized
               className="w-full h-full object-cover object-center grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
             />
+            {/* Zoom Overlay Hint */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/40 backdrop-blur-[2px]">
+              <span className="font-mono text-xs font-bold text-white bg-slate-900/90 px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                <Eye className="w-4 h-4 text-accent" />
+                CLICK TO PREVIEW
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Featured Metadata & Details */}
         <div className="flex flex-col border-l border-light-border dark:border-dark-border pl-6 sm:pl-8 py-1">
-          <div className="font-mono text-[10px] font-bold text-slate-500 tracking-[0.2em] mb-3">
+          <div className="font-mono text-[10px] font-bold text-slate-500 tracking-[0.2em] mb-3 uppercase">
             {certificate.number} {'//'} FEATURED CREDENTIAL
           </div>
 
-          <h3 className="font-sans text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 leading-tight uppercase">
+          <h3 className="font-sans text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 leading-tight uppercase group-hover:text-accent transition-colors">
             {certificate.title}
           </h3>
 
@@ -80,26 +97,27 @@ export function FeaturedCertificateCard({ certificate }: FeaturedCertificateCard
             </div>
           )}
 
-          {/* Action Button */}
-          <div>
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Preview Button */}
+            <button
+              type="button"
+              onClick={() => onPreview(certificate)}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-light-surface dark:bg-dark-surface/80 border border-light-border dark:border-dark-border text-slate-800 dark:text-white font-mono text-xs font-bold tracking-wider transition-all duration-300 hover:bg-slate-100 dark:hover:bg-dark-surface hover:border-accent dark:hover:border-accent group/btn shadow-sm"
+            >
+              PREVIEW
+              <Eye className="w-3.5 h-3.5 text-slate-400 group-hover/btn:text-accent transition-colors" />
+            </button>
+
+            {/* View Credential Button */}
             <a
               href={certificate.credentialUrl}
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-lg bg-light-surface dark:bg-dark-surface/80 border border-light-border dark:border-dark-border text-slate-800 dark:text-white font-mono text-xs tracking-wider transition-all duration-300 hover:bg-slate-100 dark:hover:bg-dark-surface hover:border-accent dark:hover:border-accent group/btn w-full sm:w-auto shadow-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-950 font-mono text-xs font-bold tracking-wider hover:bg-accent/90 transition-all duration-300 shadow-md group/link"
             >
               VIEW CREDENTIAL
-              <svg
-                className="w-3.5 h-3.5 text-slate-400 group-hover/btn:text-accent transition-all duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
+              <ExternalLink className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>

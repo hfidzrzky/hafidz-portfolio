@@ -23,22 +23,24 @@ export function FloatCard({
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const springConfig = { damping: 25, stiffness: 120 }
+  const springConfig = { damping: 30, stiffness: 100 }
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
 
   const translateX = useTransform(
     springX,
     [-0.5, 0.5],
-    [-15 * depth, 15 * depth]
+    [-10 * depth, 10 * depth]
   )
   const translateY = useTransform(
     springY,
     [-0.5, 0.5],
-    [-15 * depth, 15 * depth]
+    [-10 * depth, 10 * depth]
   )
 
   useEffect(() => {
+    let ticking = false
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -49,11 +51,17 @@ export function FloatCard({
     const handleMouseMove = (e: MouseEvent) => {
       if (window.innerWidth < 768) return
 
-      const x = e.clientX / window.innerWidth - 0.5
-      const y = e.clientY / window.innerHeight - 0.5
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const x = e.clientX / window.innerWidth - 0.5
+          const y = e.clientY / window.innerHeight - 0.5
 
-      mouseX.set(x)
-      mouseY.set(y)
+          mouseX.set(x)
+          mouseY.set(y)
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
     const handleMouseLeave = () => {
@@ -74,28 +82,28 @@ export function FloatCard({
   return (
     <motion.div
       className={cn(
-        'cursor-default origin-center pointer-events-auto transform-gpu will-change-transform',
+        'cursor-default origin-center pointer-events-auto transform-gpu will-change-[transform,opacity]',
         className
       )}
       style={isMobile ? undefined : { x: translateX, y: translateY }}
-      initial={{ opacity: 0, scale: 0.85 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{
         opacity: {
-          duration: 0.6,
-          delay: floatDelay * 0.2 + 0.2,
+          duration: 0.4,
+          delay: floatDelay * 0.15 + 0.1,
           ease: [0.16, 1, 0.3, 1],
         },
         scale: {
-          duration: 0.6,
-          delay: floatDelay * 0.2 + 0.2,
+          duration: 0.4,
+          delay: floatDelay * 0.15 + 0.1,
           ease: [0.16, 1, 0.3, 1],
         },
       }}
     >
       <motion.div
-        animate={isMobile ? undefined : { y: [0, -8, 0] }}
+        animate={isMobile ? undefined : { y: [0, -6, 0] }}
         transition={{
           y: {
             duration: floatDuration,

@@ -20,10 +20,10 @@ export function FadeIn({
   viewportOnce = true,
 }: FadeInProps) {
   const directions = {
-    up: { y: 20 },
-    down: { y: -20 },
-    left: { x: 20 },
-    right: { x: -20 },
+    up: { y: 12 },
+    down: { y: -12 },
+    left: { x: 12 },
+    right: { x: -12 },
     none: {},
   }
 
@@ -31,9 +31,9 @@ export function FadeIn({
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: viewportOnce, margin: '-40px' }}
-      transition={{ duration: 0.6, delay, ease: [0.215, 0.61, 0.355, 1] }}
-      className={cn(className)}
+      viewport={{ once: viewportOnce, margin: '-20px' }}
+      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
+      className={cn('transform-gpu will-change-[opacity,transform]', className)}
     >
       {children}
     </motion.div>
