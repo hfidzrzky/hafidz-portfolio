@@ -55,7 +55,6 @@ export function FooterNav({ quickLinks, socialLinks }: FooterNavProps) {
   return (
     <FadeIn delay={0.2} direction="up">
       <div className="py-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-b border-light-border dark:border-dark-border/40">
-        {/* Quick Links Column - 3x2 grid under 440px, flex layout min-[440px] */}
         <div className="md:col-span-6 space-y-3">
           <h3 className="font-mono text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-widest font-semibold">
             Navigation
@@ -74,7 +73,6 @@ export function FooterNav({ quickLinks, socialLinks }: FooterNavProps) {
           </ul>
         </div>
 
-        {/* Social Links Column with Icons */}
         <div className="md:col-span-4 space-y-3">
           <h3 className="font-mono text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-widest font-semibold">
             Connect
@@ -97,7 +95,6 @@ export function FooterNav({ quickLinks, socialLinks }: FooterNavProps) {
           </ul>
         </div>
 
-        {/* Back to Top Column */}
         <div className="md:col-span-2 flex md:justify-end">
           <button
             onClick={scrollToTop}

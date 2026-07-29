@@ -1,30 +1,71 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
-import { X, ExternalLink } from 'lucide-react'
+import { X, ExternalLink, Download, FileText, Image as ImageIcon } from 'lucide-react'
 import { CertificateItem } from '../types'
 import { CategoryBadge } from './CategoryBadge'
+import { lockScroll } from '@/shared/lib/scroll-lock'
 
 interface CertificateLightboxProps {
   certificate: CertificateItem | null
   onClose: () => void
 }
 
-export function CertificateLightbox({ certificate, onClose }: CertificateLightboxProps) {
-  const [mounted, setMounted] = useState(false)
+const emptySubscribe = () => () => {}
 
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
+}
+
+export function CertificateLightbox({ certificate, onClose }: CertificateLightboxProps) {
+  const isMounted = useIsMounted()
+  const [userViewMode, setUserViewMode] = useState<'pdf' | 'image' | null>(null)
+  const [prevCertId, setPrevCertId] = useState<string | null>(null)
+
+  // Deferred PDF loading states for smooth 60fps modal opening
+  const [isPdfReady, setIsPdfReady] = useState(false)
+  const [isPdfLoaded, setIsPdfLoaded] = useState(false)
+
+  // Reset user view mode selection during render when target certificate changes
+  if (certificate && certificate.id !== prevCertId) {
+    setPrevCertId(certificate.id)
+    setUserViewMode(null)
+  }
+
+  const defaultViewMode = certificate?.pdfUrl ? 'pdf' : 'image'
+  const viewMode = userViewMode ?? defaultViewMode
+
+  // Track active PDF key to reset loading state safely during render (no sync setState in useEffect)
+  const currentPdfKey = `${certificate?.id || ''}-${viewMode}`
+  const [prevPdfKey, setPrevPdfKey] = useState<string>('')
+
+  if (currentPdfKey !== prevPdfKey) {
+    setPrevPdfKey(currentPdfKey)
+    setIsPdfReady(false)
+    setIsPdfLoaded(false)
+  }
+
+  // Pure side-effect timer to mount PDF iframe after modal transition completes
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    if (!certificate || viewMode !== 'pdf') return
+
+    const timer = setTimeout(() => {
+      setIsPdfReady(true)
+    }, 150)
+
+    return () => clearTimeout(timer)
+  }, [certificate, viewMode])
 
   useEffect(() => {
     if (!certificate) return
 
-    // Hide Navbar cleanly and lock scroll
-    document.body.style.overflow = 'hidden'
-    document.body.classList.add('modal-open')
+    const unlock = lockScroll()
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -35,13 +76,12 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = ''
-      document.body.classList.remove('modal-open')
+      unlock()
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [certificate, onClose])
 
-  if (!certificate || !mounted) return null
+  if (!certificate || !isMounted) return null
 
   const rawImageUrl = certificate.imageUrl || ''
   const imageSrc =
@@ -51,12 +91,27 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
       ? rawImageUrl
       : `/${rawImageUrl}`
 
+  const rawPdfUrl = certificate.pdfUrl || ''
+  const pdfSrc = rawPdfUrl
+    ? rawPdfUrl.startsWith('http://') ||
+      rawPdfUrl.startsWith('https://') ||
+      rawPdfUrl.startsWith('/')
+      ? rawPdfUrl
+      : `/${rawPdfUrl}`
+    : null
+
+  const hasExternalCredential = Boolean(
+    certificate.credentialUrl &&
+      (certificate.credentialUrl.startsWith('http://') ||
+        certificate.credentialUrl.startsWith('https://'))
+  )
+
   return createPortal(
     <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/90 backdrop-blur-xl animate-fadeIn select-none"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/90 backdrop-blur-md animate-fadeIn select-none"
       onClick={onClose}
     >
-      {/* Floating Close Button (Top Right Corner) */}
+      {/* Floating Close Button */}
       <button
         onClick={onClose}
         type="button"
@@ -68,36 +123,93 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
 
       {/* Modal Dialog Box */}
       <div
-        className="relative max-w-5xl w-full bg-light-surface dark:bg-[#0B0F17] border border-light-border dark:border-dark-border rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh] z-10 animate-in zoom-in-95 duration-300"
+        className="relative max-w-5xl w-full bg-[#0B0F17] border border-light-border dark:border-dark-border rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[94vh] z-10 animate-in zoom-in-95 duration-300 transform-gpu isolate"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header Bar */}
-        <div className="flex items-center justify-between px-5 py-3.5 sm:px-6 sm:py-4 border-b border-light-border dark:border-dark-border/80 bg-light-bg/80 dark:bg-dark-surface/80 backdrop-blur-md">
-          <div className="flex items-center gap-3 pr-12">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 sm:px-6 sm:py-4 border-b border-light-border dark:border-dark-border/80 bg-slate-900/95">
+          <div className="flex items-center gap-3 pr-4 min-w-0">
             <CategoryBadge category={certificate.category} />
             <h3 className="font-sans text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1 uppercase tracking-tight">
               {certificate.title}
             </h3>
           </div>
+
+          {/* View Mode Switcher Tabs */}
+          {pdfSrc && (
+            <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-950/80 border border-white/10">
+              <button
+                type="button"
+                onClick={() => setUserViewMode('pdf')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-mono text-[11px] font-bold transition-all duration-300 ${
+                  viewMode === 'pdf'
+                    ? 'bg-accent text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                PDF VIEW
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserViewMode('image')}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-md font-mono text-[11px] font-bold transition-all duration-300 ${
+                  viewMode === 'image'
+                    ? 'bg-accent text-slate-950 shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <ImageIcon className="w-3.5 h-3.5" />
+                IMAGE
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Certificate Display Area */}
-        <div className="relative flex-grow w-full bg-slate-950/60 flex items-center justify-center overflow-hidden p-3 sm:p-6 min-h-[280px] sm:min-h-[420px]">
-          <div className="relative w-full h-full max-h-[68vh] flex items-center justify-center">
-            <Image
-              src={imageSrc}
-              alt={certificate.imageAlt || certificate.title}
-              width={1200}
-              height={850}
-              unoptimized
-              className="max-h-[68vh] w-auto h-auto object-contain rounded-lg shadow-2xl border border-white/10 transition-transform duration-300"
-            />
-          </div>
+        {/* Certificate Display Area - Solid background & isolated rendering for smooth PDF scrolling */}
+        <div className="relative flex-grow w-full bg-slate-950 flex items-center justify-center overflow-hidden p-2 sm:p-4 min-h-[340px] sm:min-h-[500px]">
+          {viewMode === 'pdf' && pdfSrc ? (
+            <div className="relative w-full h-full min-h-[340px] sm:min-h-[500px] max-h-[72vh] rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-slate-950 flex items-center justify-center isolate">
+              {/* Skeleton Loader Overlay */}
+              {(!isPdfReady || !isPdfLoaded) && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-950 animate-pulse p-6">
+                  <div className="w-9 h-9 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+                  <p className="font-mono text-xs font-semibold text-slate-300 tracking-wider uppercase">
+                    Loading PDF Preview...
+                  </p>
+                </div>
+              )}
+
+              {/* High-Performance Smooth PDF Iframe */}
+              {isPdfReady && (
+                <iframe
+                  src={`${pdfSrc}#toolbar=0&navpanes=0&view=FitH`}
+                  title={certificate.title}
+                  loading="lazy"
+                  onLoad={() => setIsPdfLoaded(true)}
+                  className={`w-full h-full min-h-[340px] sm:min-h-[500px] max-h-[72vh] border-0 outline-none transition-opacity duration-300 transform-gpu pointer-events-auto ${
+                    isPdfLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              )}
+            </div>
+          ) : (
+            <div className="relative w-full h-full max-h-[72vh] flex items-center justify-center">
+              <Image
+                src={imageSrc}
+                alt={certificate.imageAlt || certificate.title}
+                width={1200}
+                height={850}
+                unoptimized
+                className="max-h-[72vh] w-auto h-auto object-contain rounded-lg shadow-2xl border border-white/10 transition-transform duration-300"
+              />
+            </div>
+          )}
         </div>
 
         {/* Modal Footer Bar */}
-        <div className="p-4 sm:p-5 border-t border-light-border dark:border-dark-border/80 bg-light-bg/90 dark:bg-dark-surface/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1">
+        <div className="p-4 sm:p-5 border-t border-light-border dark:border-dark-border/80 bg-slate-900/95 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="space-y-1 max-w-xl">
             <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-slate-500 dark:text-slate-400 uppercase">
               <span className="font-semibold text-slate-800 dark:text-slate-200">{certificate.provider}</span>
               <span>•</span>
@@ -105,21 +217,45 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
               <span>•</span>
               <span>{certificate.year}</span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
               {certificate.description}
             </p>
           </div>
 
-          <div className="w-full sm:w-auto flex-shrink-0">
-            <a
-              href={certificate.credentialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-950 font-mono text-xs font-bold tracking-wider hover:bg-accent/90 transition-all shadow-md group/btn"
-            >
-              VIEW CREDENTIAL
-              <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-            </a>
+          <div className="w-full md:w-auto flex flex-wrap items-center justify-end gap-2.5 flex-shrink-0">
+            {pdfSrc && (
+              <>
+                <a
+                  href={pdfSrc}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900/10 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-mono text-xs font-bold tracking-wider hover:border-accent transition-all shadow-sm group/btn"
+                >
+                  OPEN PDF
+                  <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </a>
+                <a
+                  href={pdfSrc}
+                  download
+                  className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900/10 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-mono text-xs font-bold tracking-wider hover:border-accent transition-all shadow-sm group/btn"
+                >
+                  DOWNLOAD
+                  <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform text-accent" />
+                </a>
+              </>
+            )}
+
+            {hasExternalCredential && (
+              <a
+                href={certificate.credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-950 font-mono text-xs font-bold tracking-wider hover:bg-accent/90 transition-all shadow-md group/btn"
+              >
+                VIEW CREDENTIAL
+                <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ export function StoriesHeader({ data }: StoriesHeaderProps) {
           {data.titlePart2}
           <br />
           <span className="inline-block mt-2 md:mt-4">
-            <TapeText>{data.tapeText}</TapeText>
+            <TapeText className='p-3'>{data.tapeText}</TapeText>
           </span>
         </h1>
 

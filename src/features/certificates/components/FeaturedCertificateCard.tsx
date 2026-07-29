@@ -110,15 +110,19 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
             </button>
 
             {/* View Credential Button */}
-            <a
-              href={certificate.credentialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-950 font-mono text-xs font-bold tracking-wider hover:bg-accent/90 transition-all duration-300 shadow-md group/link"
-            >
-              VIEW CREDENTIAL
-              <ExternalLink className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-            </a>
+            {certificate.credentialUrl &&
+              (certificate.credentialUrl.startsWith('http://') ||
+                certificate.credentialUrl.startsWith('https://')) && (
+                <a
+                  href={certificate.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-slate-950 font-mono text-xs font-bold tracking-wider hover:bg-accent/90 transition-all duration-300 shadow-md group/link"
+                >
+                  VIEW CREDENTIAL
+                  <ExternalLink className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                </a>
+              )}
           </div>
         </div>
       </FadeIn>

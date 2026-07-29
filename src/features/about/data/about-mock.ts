@@ -12,7 +12,7 @@ export const aboutMockData: AboutData = {
     },
     personalNote: [
       "I'm still early in my engineering journey.",
-      "I'm not trying to master every technology I encounter. I'm trying to understand the systems behind the things I build — and how each piece fits together.",
+      "I'm not trying to master every technology I encounter. I'm trying to understand the systems behind the things I build and how each piece fits together.",
     ],
     systemStatus: 'system.status = "building"',
   },

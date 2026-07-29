@@ -20,7 +20,7 @@ export function LabHeader({ data }: LabHeaderProps) {
 
         <h2 className="font-sans text-[30px] sm:text-[42px] md:text-[56px] font-bold tracking-tight uppercase leading-none mb-4 text-slate-900 dark:text-white">
           {data.titlePrefix}
-          <TapeText>{data.tapeText}</TapeText>
+          <TapeText className='p-2'>{data.tapeText}</TapeText>
           {data.titleSuffix}
         </h2>
 

@@ -64,10 +64,11 @@ export const LAB_MOCK_DATA: LabData = {
       subtitle: 'Running software in reality',
       technologies: [
         { name: 'Docker', status: 'exploring' },
+        { name: 'VPS', status: 'exploring' },
         { name: 'CI/CD', status: 'used' },
         { name: 'Vercel', status: 'used' },
         { name: 'GitHub Actions', status: 'used' },
-        { name: 'VPS', status: 'used' },
+        { name: 'CloudFlare', status: 'used' },
       ],
       focus: 'Understanding what happens after code leaves development.',
     },

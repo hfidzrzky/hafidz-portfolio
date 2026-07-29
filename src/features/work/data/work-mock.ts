@@ -100,7 +100,7 @@ export const workMockData: WorkData = {
       timeframe: '2026 - PRESENT',
       title: 'Sinemus Screen (V3 Re-Engineering)',
       shortDescription:
-        'Architecting the V3 evolution of Sinemus Screen — transforming the streaming & event screening platform into a high-performance, enterprise-grade core powering Sinemus Indonesia’s ecosystem.',
+        'Architecting the V3 evolution of Sinemus Screen. Transforming the streaming & event screening platform into a high-performance, enterprise-grade core powering Sinemus Indonesia’s ecosystem.',
 
       modalData: {
         subtitle: 'Flagship Ecosystem Core • Sinemus Screen V3',

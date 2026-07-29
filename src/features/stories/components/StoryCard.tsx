@@ -32,7 +32,6 @@ export function StoryCard({ story, index }: StoryCardProps) {
                   imageAlt={story.imageAlt}
                   formattedIndex={formattedIndex}
                   isEven={isEven}
-                  cardIndex={index}
                 />
               </div>
 
@@ -66,7 +65,6 @@ export function StoryCard({ story, index }: StoryCardProps) {
                   imageAlt={story.imageAlt}
                   formattedIndex={formattedIndex}
                   isEven={isEven}
-                  cardIndex={index}
                 />
               </div>
             </>

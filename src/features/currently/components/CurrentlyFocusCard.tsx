@@ -3,7 +3,7 @@
 import { DraftingCompass, Workflow, Server } from 'lucide-react'
 import { FadeIn } from '@/shared/ui/animations/FadeIn'
 import { FocusCardItem, FocusStatusType } from '../types'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
 
 interface CurrentlyFocusCardProps {
   card: FocusCardItem

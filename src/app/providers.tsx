@@ -3,7 +3,6 @@
 import { ThemeProvider } from 'next-themes'
 import { ReactNode } from 'react'
 
-// Suppress React 19 false-positive script tag warning emitted by next-themes in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
   const origConsoleError = console.error
   console.error = (...args: unknown[]) => {

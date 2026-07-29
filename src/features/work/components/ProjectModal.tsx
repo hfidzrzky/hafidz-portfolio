@@ -1,16 +1,29 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'motion/react'
 import { X, Database, Server, Lock, ExternalLink, Code, Terminal, Globe } from 'lucide-react'
 import { ProjectItem } from '../types'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
+import { lockScroll } from '@/shared/lib/scroll-lock'
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
 interface ProjectModalProps {
   project: ProjectItem | undefined
   isOpen: boolean
   onClose: () => void
+}
+
+const emptySubscribe = () => () => {}
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
 }
 
 const architectureIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -23,14 +36,12 @@ const architectureIconMap: Record<string, React.ComponentType<{ className?: stri
 }
 
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const isMounted = useIsMounted()
 
   useEffect(() => {
     if (!isOpen || !project) return
+
+    const unlock = lockScroll()
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -41,18 +52,43 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
+      unlock()
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, project, onClose])
 
-  if (!isOpen || !project || !mounted) return null
-
-  const { modalData } = project
+  if (!isMounted) return null
 
   return createPortal(
-    <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/85 backdrop-blur-xl animate-fadeIn select-none overflow-y-auto"
+    <AnimatePresence>
+      {isOpen && project && (
+        <ProjectModalDialog project={project} onClose={onClose} />
+      )}
+    </AnimatePresence>,
+    document.body
+  )
+}
+
+function ProjectModalDialog({
+  project,
+  onClose,
+}: {
+  project: ProjectItem
+  onClose: () => void
+}) {
+  const { modalData } = project
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: MOTION_DURATIONS.fast, ease: MOTION_EASINGS.smooth }}
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-black/85 backdrop-blur-xl select-none overflow-y-auto"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Project Details Modal"
     >
       {/* Floating Close Button (Top Right Corner) */}
       <button
@@ -65,8 +101,12 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
       </button>
 
       {/* Modal Dialog Box */}
-      <div
-        className="relative max-w-5xl w-full bg-light-surface dark:bg-[#0B0F17] border border-light-border dark:border-dark-border rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] my-auto z-10 animate-in zoom-in-95 duration-300 select-text"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ duration: MOTION_DURATIONS.fast, ease: MOTION_EASINGS.smooth }}
+        className="relative max-w-5xl w-full bg-light-surface dark:bg-[#0B0F17] border border-light-border dark:border-dark-border rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] my-auto z-10 select-text transform-gpu"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Modal Top Header */}
@@ -299,8 +339,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
           </div>
         </div>
-      </div>
-    </div>,
-    document.body
+      </motion.div>
+    </motion.div>
   )
 }

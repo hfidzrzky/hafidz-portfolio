@@ -2,7 +2,8 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import { useEffect, useState, ReactNode } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils'
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
 export interface FloatCardProps {
   children: ReactNode
@@ -20,10 +21,11 @@ export function FloatCard({
   className,
 }: FloatCardProps) {
   const [isMobile, setIsMobile] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(true)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const springConfig = { damping: 30, stiffness: 100 }
+  const springConfig = MOTION_EASINGS.springInteractive
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
 
@@ -40,6 +42,7 @@ export function FloatCard({
 
   useEffect(() => {
     let ticking = false
+    let rafId: number | null = null
 
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
@@ -52,7 +55,7 @@ export function FloatCard({
       if (window.innerWidth < 768) return
 
       if (!ticking) {
-        window.requestAnimationFrame(() => {
+        rafId = window.requestAnimationFrame(() => {
           const x = e.clientX / window.innerWidth - 0.5
           const y = e.clientY / window.innerHeight - 0.5
 
@@ -73,6 +76,9 @@ export function FloatCard({
     window.addEventListener('mouseleave', handleMouseLeave, { passive: true })
 
     return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+      }
       window.removeEventListener('resize', checkMobile)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseleave', handleMouseLeave)
@@ -82,23 +88,25 @@ export function FloatCard({
   return (
     <motion.div
       className={cn(
-        'cursor-default origin-center pointer-events-auto transform-gpu will-change-[transform,opacity]',
+        'cursor-default origin-center pointer-events-auto transform-gpu',
+        isAnimating && 'will-change-[transform,opacity]',
         className
       )}
       style={isMobile ? undefined : { x: translateX, y: translateY }}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: '-50px' }}
+      onAnimationComplete={() => setIsAnimating(false)}
       transition={{
         opacity: {
-          duration: 0.4,
+          duration: MOTION_DURATIONS.default,
           delay: floatDelay * 0.15 + 0.1,
-          ease: [0.16, 1, 0.3, 1],
+          ease: MOTION_EASINGS.smooth,
         },
         scale: {
-          duration: 0.4,
+          duration: MOTION_DURATIONS.default,
           delay: floatDelay * 0.15 + 0.1,
-          ease: [0.16, 1, 0.3, 1],
+          ease: MOTION_EASINGS.smooth,
         },
       }}
     >

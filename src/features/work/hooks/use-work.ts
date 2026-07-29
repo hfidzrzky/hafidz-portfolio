@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { workMockData } from '../data/work-mock'
 import { WorkData, ProjectItem } from '../types'
 
@@ -23,29 +23,6 @@ export function useWork(): UseWorkReturn {
     setActiveModalId(null)
   }, [])
 
-  useEffect(() => {
-    if (activeModalId) {
-      document.body.style.overflow = 'hidden'
-      document.body.classList.add('modal-open')
-
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          closeModal()
-        }
-      }
-
-      window.addEventListener('keydown', handleKeyDown)
-      return () => {
-        document.body.style.overflow = ''
-        document.body.classList.remove('modal-open')
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    } else {
-      document.body.style.overflow = ''
-      document.body.classList.remove('modal-open')
-    }
-  }, [activeModalId, closeModal])
-
   const activeProject = workMockData.projects.find(
     (p) => p.id === activeModalId
   )
@@ -58,3 +35,4 @@ export function useWork(): UseWorkReturn {
     closeModal,
   }
 }
+

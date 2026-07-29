@@ -13,7 +13,7 @@ export const CONTACT_DATA: ContactData = {
   info: {
     title: 'Get In Touch',
     emailLabel: 'Prefer Email?',
-    email: 'hello@yourdomain.com',
+    email: 'muhammadhafidzz133@gmail.com',
     socialTitle: 'Or Find Me Elsewhere',
     socialLinks: [
       {

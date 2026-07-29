@@ -14,7 +14,6 @@ export function FooterCta({ data }: FooterCtaProps) {
     <FadeIn delay={0.1} direction="up">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-12 sm:pb-16 border-b border-light-border dark:border-dark-border/60">
         <div className="lg:col-span-8 space-y-6">
-          {/* Status Badge */}
           <div className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-accent/30 dark:border-accent/50 bg-accent/5 dark:bg-accent/10 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
@@ -25,20 +24,17 @@ export function FooterCta({ data }: FooterCtaProps) {
             </span>
           </div>
 
-          {/* Big Headline */}
           <h2 className="font-sans text-3xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-slate-900 dark:text-white leading-[1.05]">
             {data.headlineLine1}
             <br />
             <span className="text-slate-500 dark:text-slate-400">{data.headlineLine2}</span>
           </h2>
 
-          {/* Supporting Copy */}
           <p className="font-mono text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
             {data.description}
           </p>
         </div>
 
-        {/* Primary CTA Button */}
         <div className="lg:col-span-4 lg:flex lg:justify-end">
           <a
             href={data.ctaHref}

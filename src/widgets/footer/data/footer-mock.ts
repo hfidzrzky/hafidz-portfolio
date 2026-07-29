@@ -1,3 +1,5 @@
+import { ALL_NAVIGATION, CONTACT_LINK } from '@/shared/constants/navigation'
+
 export interface FooterNavLink {
   label: string
   path: string
@@ -34,16 +36,12 @@ export const FOOTER_DATA: FooterData = {
     description:
       'Have a project in mind, an architectural query, or just want to connect? My inbox is always open.',
     ctaText: 'Start a Conversation',
-    ctaHref: '#contact',
+    ctaHref: CONTACT_LINK.path,
   },
-  quickLinks: [
-    { label: 'About', path: '#about' },
-    { label: 'Work', path: '#work' },
-    { label: 'Lab', path: '#lab' },
-    { label: 'Stories', path: '#stories' },
-    { label: 'Certificates', path: '#certificates' },
-    { label: 'Contact', path: '#contact' },
-  ],
+  quickLinks: ALL_NAVIGATION.map((nav) => ({
+    label: nav.label,
+    path: nav.path,
+  })),
   socialLinks: [
     {
       name: 'GitHub',

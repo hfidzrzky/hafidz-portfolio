@@ -9,7 +9,6 @@ interface StoryImageProps {
   imageAlt: string
   formattedIndex?: string
   isEven: boolean
-  cardIndex?: number
 }
 
 export function StoryImage({
@@ -17,7 +16,6 @@ export function StoryImage({
   images,
   imageAlt,
   isEven,
-  cardIndex = 0,
 }: StoryImageProps) {
   const imageList = images && images.length > 0 ? images : [imageUrl]
 
@@ -26,7 +24,6 @@ export function StoryImage({
       images={imageList}
       imageAlt={imageAlt}
       isEven={isEven}
-      cardIndex={cardIndex}
     />
   )
 }

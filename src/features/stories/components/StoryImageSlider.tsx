@@ -5,19 +5,18 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react'
 import { StoryLightbox } from './StoryLightbox'
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
 interface StoryImageSliderProps {
   images: string[]
   imageAlt: string
   isEven: boolean
-  cardIndex: number
 }
 
 export function StoryImageSlider({
   images,
   imageAlt,
   isEven,
-  cardIndex,
 }: StoryImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
@@ -119,8 +118,8 @@ export function StoryImageSlider({
               initial={{ opacity: 0.85 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.85 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="relative w-full h-full"
+              transition={{ duration: MOTION_DURATIONS.fast, ease: MOTION_EASINGS.smooth }}
+              className="relative w-full h-full transform-gpu"
             >
               <Image
                 key={imageSrc}
@@ -130,7 +129,7 @@ export function StoryImageSlider({
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 unoptimized
                 priority={currentIndex === 0}
-                className="object-cover filter grayscale-[15%] brightness-[0.9] dark:brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-100 dark:group-hover:brightness-95 group-hover:scale-[1.02] transition-all duration-700 ease-out"
+                className="object-cover filter grayscale-[15%] brightness-[0.9] dark:brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-100 dark:group-hover:brightness-95 group-hover:scale-[1.03] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu"
               />
             </motion.div>
           </AnimatePresence>

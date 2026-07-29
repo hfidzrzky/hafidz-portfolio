@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
+import { ReactNode, useState } from 'react'
+import { cn } from '@/shared/lib/utils'
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
 export interface FadeInProps {
   children: ReactNode
@@ -19,11 +20,13 @@ export function FadeIn({
   className,
   viewportOnce = true,
 }: FadeInProps) {
+  const [isAnimating, setIsAnimating] = useState(true)
+
   const directions = {
-    up: { y: 12 },
-    down: { y: -12 },
-    left: { x: 12 },
-    right: { x: -12 },
+    up: { y: 16 },
+    down: { y: -16 },
+    left: { x: 16 },
+    right: { x: -16 },
     none: {},
   }
 
@@ -31,9 +34,18 @@ export function FadeIn({
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: viewportOnce, margin: '-20px' }}
-      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={cn('transform-gpu will-change-[opacity,transform]', className)}
+      viewport={{ once: viewportOnce, margin: '-50px' }}
+      transition={{
+        duration: MOTION_DURATIONS.default,
+        delay,
+        ease: MOTION_EASINGS.smooth,
+      }}
+      onAnimationComplete={() => setIsAnimating(false)}
+      className={cn(
+        'transform-gpu',
+        isAnimating && 'will-change-[opacity,transform]',
+        className
+      )}
     >
       {children}
     </motion.div>

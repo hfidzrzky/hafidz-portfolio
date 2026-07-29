@@ -9,7 +9,8 @@ export interface CertificateItem {
   description: string
   imageUrl: string
   imageAlt: string
-  credentialUrl: string
+  credentialUrl?: string
+  pdfUrl?: string
   tags?: string[]
   isVerified?: boolean
   isFeatured?: boolean

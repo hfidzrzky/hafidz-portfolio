@@ -97,15 +97,19 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
             </button>
 
             {/* View Credential Button */}
-            <a
-              href={certificate.credentialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[10px] text-accent hover:text-accent-hover transition-colors duration-300 uppercase tracking-widest font-bold"
-            >
-              VIEW CREDENTIAL
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            {certificate.credentialUrl &&
+              (certificate.credentialUrl.startsWith('http://') ||
+                certificate.credentialUrl.startsWith('https://')) && (
+                <a
+                  href={certificate.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-[10px] text-accent hover:text-accent-hover transition-colors duration-300 uppercase tracking-widest font-bold"
+                >
+                  VIEW CREDENTIAL
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
           </div>
         </div>
       </div>

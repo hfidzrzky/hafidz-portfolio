@@ -60,7 +60,7 @@ export const currentlyMockData: CurrentlyData = {
       statusType: 'learning',
       title: 'SYSTEMS & INFRASTRUCTURE',
       description:
-        'Trying to understand what happens beyond the application — deployment, servers, networks, performance, security, and the systems that keep software running.',
+        'Trying to understand what happens beyond the application, deployment, servers, networks, performance, security, and the systems that keep software running.',
     },
   ],
 }

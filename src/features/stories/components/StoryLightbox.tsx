@@ -1,10 +1,12 @@
 'use client'
 
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useCallback, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { lockScroll } from '@/shared/lib/scroll-lock'
+import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
 interface StoryLightboxProps {
   isOpen: boolean
@@ -15,6 +17,16 @@ interface StoryLightboxProps {
   imageAlt: string
 }
 
+const emptySubscribe = () => () => {}
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
+}
+
 export function StoryLightbox({
   isOpen,
   onClose,
@@ -23,11 +35,7 @@ export function StoryLightbox({
   onSelectIndex,
   imageAlt,
 }: StoryLightboxProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const isMounted = useIsMounted()
 
   const totalImages = images.length
   const rawActiveImage = images[currentIndex] || images[0] || ''
@@ -62,6 +70,8 @@ export function StoryLightbox({
   useEffect(() => {
     if (!isOpen) return
 
+    const unlock = lockScroll()
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
@@ -72,16 +82,15 @@ export function StoryLightbox({
       }
     }
 
-    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = ''
+      unlock()
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, onClose, handlePrev, handleNext])
 
-  if (!isOpen || !mounted) return null
+  if (!isOpen || !isMounted) return null
 
   const formattedCounter = `/ ${String(currentIndex + 1).padStart(2, '0')} — ${String(totalImages).padStart(2, '0')}`
 
@@ -92,7 +101,7 @@ export function StoryLightbox({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: MOTION_DURATIONS.fast, ease: MOTION_EASINGS.smooth }}
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8 select-none"
           onClick={onClose}
           role="dialog"
@@ -161,7 +170,7 @@ export function StoryLightbox({
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                transition={{ duration: MOTION_DURATIONS.fast, ease: MOTION_EASINGS.smooth }}
                 className="relative w-full h-full max-h-[85vh] flex items-center justify-center"
               >
                 <div className="relative w-full h-full min-h-[300px] md:min-h-[550px]">
