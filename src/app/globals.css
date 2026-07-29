@@ -16,8 +16,7 @@ html {
 }
 
 .section-content-visibility {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
+  contain: layout style;
 }
 
 @theme {

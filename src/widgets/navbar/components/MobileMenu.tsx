@@ -24,6 +24,20 @@ export function MobileMenu() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    closeMenu()
+
+    if (path.startsWith('#')) {
+      const targetId = path.replace(/^#/, '')
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        e.preventDefault()
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', path)
+      }
+    }
+  }
+
   return (
     <div className="md:hidden flex items-center gap-3">
       <ThemeToggle />
@@ -53,7 +67,7 @@ export function MobileMenu() {
                 <Link
                   key={item.label}
                   href={item.path}
-                  onClick={closeMenu}
+                  onClick={(e) => handleNavClick(e, item.path)}
                   className="relative py-2 border-b border-light-border/50 dark:border-dark-border/50 hover:text-accent dark:hover:text-white transition-colors group flex items-center justify-between"
                 >
                   <span>{item.label}</span>
@@ -64,7 +78,7 @@ export function MobileMenu() {
 
             <Link
               href={CONTACT_LINK.path}
-              onClick={closeMenu}
+              onClick={(e) => handleNavClick(e, CONTACT_LINK.path)}
               className="flex items-center justify-center gap-3 border border-accent bg-accent/10 px-5 py-3 font-mono text-xs uppercase tracking-wider text-accent font-semibold hover:bg-accent hover:text-white transition-all text-center"
             >
               {CONTACT_LINK.label}
@@ -75,5 +89,6 @@ export function MobileMenu() {
       </AnimatePresence>
     </div>
   )
+
 }
 
