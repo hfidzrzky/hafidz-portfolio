@@ -16,7 +16,7 @@ export function CurrentlyCoreIdentity({ data }: CurrentlyCoreIdentityProps) {
     <div className="lg:col-span-5 relative flex flex-col w-full pl-0 md:pl-16 space-y-8 z-10">
       {/* Subheading Badge */}
       <FadeIn delay={0.1}>
-        <Badge variant="accent">{data.badge}</Badge>
+        <Badge>{data.badge}</Badge>
       </FadeIn>
 
       {/* Headline */}

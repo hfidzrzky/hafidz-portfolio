@@ -14,7 +14,7 @@ export function WorkHeader({ data }: WorkHeaderProps) {
     <div className="max-w-3xl w-full">
       <FadeIn delay={0.1}>
         <div className="inline-flex items-center mb-6">
-          <Badge variant="accent">{data.badge}</Badge>
+          <Badge>{data.badge}</Badge>
         </div>
       </FadeIn>
 

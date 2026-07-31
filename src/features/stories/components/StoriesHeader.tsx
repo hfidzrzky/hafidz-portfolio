@@ -18,7 +18,7 @@ export function StoriesHeader({ data }: StoriesHeaderProps) {
         {/* Category Tag & Live Status */}
         <div className="flex flex-wrap items-center gap-4 mb-6 md:mb-10">
           <Badge>{data.sectionTag}</Badge>
-          <div className="hidden md:block h-[1px] w-12 bg-accent/30" />
+          <div className="hidden md:block h-px w-12 bg-accent/30" />
           <span className="font-mono text-[10px] md:text-xs text-slate-500 dark:text-slate-400 tracking-widest uppercase flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             {data.badgeText}

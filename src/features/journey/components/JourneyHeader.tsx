@@ -11,7 +11,7 @@ interface JourneyHeaderProps {
 export function JourneyHeader({ data }: JourneyHeaderProps) {
   return (
     <FadeIn delay={0.1} direction="up" className="mb-24 flex flex-col justify-start">
-      <Badge variant="accent" className="mb-4 self-start">
+      <Badge className="mb-4 self-start">
         {data.badgeText}
       </Badge>
 
@@ -24,7 +24,7 @@ export function JourneyHeader({ data }: JourneyHeaderProps) {
       </h2>
 
       <div className="border-l-2 border-accent pl-5 max-w-2xl relative">
-        <span className="absolute -left-[1.35rem] top-0 text-accent font-mono text-xl">
+        <span className="absolute left-[-1.35rem] top-0 text-accent font-mono text-xl">
           &gt;
         </span>
         <p className="font-mono text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
