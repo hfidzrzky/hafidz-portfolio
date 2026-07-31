@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://muhammadhafidz-portfolio.vercel.app'),
   title: {
-    default: 'Muhammad Hafidz — Software Engineer',
+    default: 'Muhammad Hafidz - Software Engineering In Progress',
     template: '%s | Muhammad Hafidz',
   },
   description:
