@@ -33,8 +33,8 @@ export const STORIES_MOCK_DATA: StoriesData = {
           ],
           imageAlt: 'Dicoding Developer Conference Event Photos',
           meta: {
-            locationOrRole: 'Bandung, ID',
-            date: 'MARH 2026',
+            locationOrRole: 'Hotel Hilton Bandung',
+            date: '25 APR 2025',
             iconType: 'location',
           },
         },
