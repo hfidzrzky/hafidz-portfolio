@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ContactHeaderData } from '../types'
+import { Badge } from '@/shared/ui/Badge'
 import { FadeIn } from '@/shared/ui/animations/FadeIn'
 import { ArrowRight } from 'lucide-react'
 
@@ -14,14 +15,10 @@ export function ContactHero({ data }: ContactHeroProps) {
     <div className="mb-24 md:mb-32">
       <FadeIn delay={0.1} direction="up">
         {/* SECTION LABEL BADGE */}
-        <div className="inline-block border border-accent/30 dark:border-accent/50 px-3 py-1.5 bg-accent/5 dark:bg-accent/10 backdrop-blur-sm mb-8">
-          <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-accent font-semibold">
-            {data.sectionTag}
-          </span>
-        </div>
+        <Badge>{data.badge}</Badge>
 
         {/* PRIMARY HEADLINE */}
-        <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight uppercase leading-[0.9] text-slate-900 dark:text-white mb-4">
+        <h1 className="font-sans mt-4 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight uppercase leading-[0.9] text-slate-900 dark:text-white mb-4">
           {data.headlineLine1}
           <br />
           <span className="text-accent relative inline-block mt-2">

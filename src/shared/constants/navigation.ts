@@ -31,7 +31,7 @@ export const MAIN_NAVIGATION: NavItem[] = [
 
 export const CONTACT_LINK: NavItem = {
   id: SECTION_IDS.CONTACT,
-  label: 'Lets Talk!',
+  label: 'Let\'s Talk',
   path: formatSectionHash(SECTION_IDS.CONTACT),
 }
 

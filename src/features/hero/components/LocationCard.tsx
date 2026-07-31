@@ -16,10 +16,10 @@ export function LocationCard({ data }: LocationCardProps) {
         {data.city}<br />{data.country}
       </div>
       
-      <div className="w-full h-[1px] bg-light-border dark:bg-dark-border my-0.5" />
+      <div className="w-full h-px bg-light-border dark:bg-dark-border my-0.5" />
 
       <div className="flex items-center justify-between mt-0.5">
-        <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+        <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400">
           {data.socials.map((social) => (
             <a
               key={social.platform}

@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { CertificatesHeaderData } from '../types'
+import { Badge } from '@/shared/ui/Badge'
 import { TapeText } from '@/shared/ui/TapeText'
 import { FadeIn } from '@/shared/ui/animations/FadeIn'
 
@@ -15,13 +16,7 @@ export function CertificatesHeader({ data }: CertificatesHeaderProps) {
       <div className="lg:sticky lg:top-36 relative">
         <FadeIn delay={0.1} direction="up" className="space-y-5 z-10 w-full">
           {/* Label Badge */}
-          <div>
-            <div className="inline-block border border-accent/30 dark:border-accent/50 px-3 py-1.5 bg-accent/5 dark:bg-accent/10 backdrop-blur-sm">
-              <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-accent font-semibold">
-                {data.sectionTag}
-              </span>
-            </div>
-          </div>
+          <Badge>{data.badge}</Badge>
 
           {/* Headline */}
           <h2 className="font-sans text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 dark:text-white mb-10 tracking-tight uppercase leading-none">

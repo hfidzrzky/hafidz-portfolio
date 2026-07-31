@@ -22,12 +22,12 @@ export function HeroPortrait({ portrait }: HeroPortraitProps) {
             duration: MOTION_DURATIONS.hero,
             ease: MOTION_EASINGS.smooth,
           }}
-          className="w-[250px] sm:w-[290px] md:w-[320px] h-[330px] sm:h-[370px] md:h-[400px] bg-gradient-to-tr from-dark-bg via-accent/15 to-[#1E3A8A]/25 backdrop-blur-md sm:backdrop-blur-3xl rounded-2xl border border-white/5 mt-4 shadow-xl transform-gpu"
+          className="w-62.5 sm:w-72.5 md:w-[320px] h-82.5 sm:h-92.5 md:h-100 bg-linear-to-tr from-dark-bg via-accent/15 to-[#1E3A8A]/25 backdrop-blur-md sm:backdrop-blur-3xl rounded-2xl border border-white/5 mt-4 shadow-xl transform-gpu"
         />
       </div>
 
       {/* Main Portrait */}
-      <div className="relative z-10 w-full max-w-[380px] sm:max-w-[420px] md:max-w-[460px] h-full flex justify-center mx-auto pointer-events-none">
+      <div className="relative z-10 w-full max-w-95 sm:max-w-105 md:max-w-115 h-full flex justify-center mx-auto pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -37,7 +37,7 @@ export function HeroPortrait({ portrait }: HeroPortraitProps) {
             ease: MOTION_EASINGS.smooth,
             delay: 0.15,
           }}
-          className="relative h-full flex items-end justify-center w-[320px] sm:w-[380px] md:w-[400px] transform-gpu"
+          className="relative h-full flex items-end justify-center w-[320px] sm:w-95 md:w-100 transform-gpu"
         >
           <Image
             src={portrait.image}

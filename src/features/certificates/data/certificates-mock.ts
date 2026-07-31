@@ -2,7 +2,7 @@ import { CertificatesData } from '../types'
 
 export const certificatesMockData: CertificatesData = {
   header: {
-    sectionTag: 'CERTIFICATES & CREDENTIALS',
+    badge: 'CERTIFICATES & CREDENTIALS',
     titlePart1: "What I've",
     tapeText: 'Learned.',
     quoteLines: [

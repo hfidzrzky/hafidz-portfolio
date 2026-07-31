@@ -20,8 +20,7 @@ export function EngineeringPrinciplesList({
       {/* Section Header */}
       <FadeIn delay={0.1}>
         <div className="flex items-center gap-4 mb-8">
-          <div className="w-6 h-[1px] bg-accent" />
-          <h3 className="font-mono text-xs md:text-sm uppercase tracking-widest text-accent font-semibold">
+          <h3 className="font-mono text-xs md:text-sm uppercase tracking-widest text-accent/70 font-semibold">
             {number} / {title}
           </h3>
         </div>

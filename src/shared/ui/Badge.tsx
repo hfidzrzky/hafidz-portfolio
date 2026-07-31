@@ -2,21 +2,30 @@ import { ReactNode } from 'react'
 import { cn } from '@/shared/lib/utils'
 
 interface BadgeProps {
-  children: ReactNode;
-  variant?: 'accent' | 'outline';
-  className?: string;
+  children: ReactNode
+  animated?: boolean
+  showDot?: boolean
+  className?: string
 }
 
-export function Badge({ children, variant = 'accent', className }: BadgeProps) {
-  const baseStyles = "inline-block border px-3 py-1.5 backdrop-blur-sm"
-  const variants = {
-    accent: "border-accent/30 dark:border-accent/50 bg-accent/5 dark:bg-accent/10 text-accent font-semibold",
-    outline: "border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 text-slate-600 dark:text-slate-400",
-  }
-
+export function Badge({ 
+  children, 
+  animated = true, 
+  showDot = true, 
+  className 
+}: BadgeProps) {
   return (
-    <div className={cn(baseStyles, variants[variant], className)}>
-      <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em]">
+    <div className={cn("inline-flex items-center gap-2.5 select-none", className)}>
+      {showDot && (
+        <span className="relative flex h-2 w-2 items-center justify-center">
+          {animated && (
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+          )}
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+        </span>
+      )}
+
+      <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300 font-medium">
         {children}
       </span>
     </div>

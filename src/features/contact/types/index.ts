@@ -12,7 +12,7 @@ export interface SubjectOption {
 }
 
 export interface ContactHeaderData {
-  sectionTag: string
+  badge: string
   headlineLine1: string
   headlineLine2: string
   quoteText: string

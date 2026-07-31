@@ -15,7 +15,7 @@ interface HeroVisualProps {
 
 export function HeroVisual({ portrait, cards }: HeroVisualProps) {
   return (
-    <div className="lg:col-span-6 relative flex justify-center items-center h-[380px] sm:h-[480px] lg:h-[500px] mt-8 lg:mt-0 w-full max-w-full overflow-hidden sm:overflow-visible transform-gpu">
+    <div className="lg:col-span-6 relative flex justify-center items-center h-95 sm:h-120 lg:h-125 mt-8 lg:mt-0 w-full max-w-full overflow-hidden sm:overflow-visible transform-gpu">
       {/* Central Portrait */}
       <HeroPortrait portrait={portrait} />
 
@@ -55,7 +55,7 @@ export function HeroVisual({ portrait, cards }: HeroVisualProps) {
           depth={0.9}
           floatDelay={1.5}
           floatDuration={5.5}
-          className="absolute bottom-[3%] sm:bottom-[5%] right-0 scale-75 sm:scale-90 lg:scale-100 origin-bottom-right max-w-[180px] sm:max-w-[200px] lg:max-w-[220px] pointer-events-auto"
+          className="absolute bottom-[3%] sm:bottom-[5%] right-0 scale-75 sm:scale-90 lg:scale-100 origin-bottom-right max-w-45 sm:max-w-50 lg:max-w-55 pointer-events-auto"
         >
           <CurrentlyCard data={cards.currently} />
         </FloatCard>

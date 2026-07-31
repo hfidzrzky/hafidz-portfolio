@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://muhammadhafidz-portfolio.vercel.app',
-    title: 'Muhammad Hafidz — Software Engineer',
+    title: 'Muhammad Hafidz - Software Engineering In Progress',
     description:
       'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
     siteName: 'Muhammad Hafidz Portfolio',
@@ -71,13 +71,13 @@ export const metadata: Metadata = {
         url: '/images/hafidz-img.png',
         width: 1200,
         height: 630,
-        alt: 'Muhammad Hafidz — Software Engineer Portfolio',
+        alt: 'Muhammad Hafidz - Software Engineering In Progress',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammad Hafidz — Software Engineer',
+    title: 'Muhammad Hafidz - Software Engineering In Progress',
     description:
       'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
     creator: '@hfidzrzky_',

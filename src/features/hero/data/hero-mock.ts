@@ -2,7 +2,6 @@ import { HeroData } from '../types'
 
 export const heroMockData: HeroData = {
   sectionNumber: "01",
-  badge: "Software Engineer In Progress",
   
   headline: {
     line1: "I Build,",
@@ -10,7 +9,7 @@ export const heroMockData: HeroData = {
     tape: "Learn.",
   },
   
-  description: "I'm Muhammad Hafidz — exploring software engineering by building real products, breaking things, and figuring out how the systems behind them work.",
+  description: "I'm Muhammad Hafidz - exploring software engineering by building real products, breaking things, and figuring out how the systems behind them work.",
   
   ctaButtons: [
     {
@@ -39,13 +38,27 @@ export const heroMockData: HeroData = {
   
   cards: {
     terminal: {
-      items: [
-        { label: "Building", isHighlighted: true },
-        { label: "Breaking", isHighlighted: true },
-        { label: "Learning", isHighlighted: true },
-        { label: "Shipping", isHighlighted: false, hasPulse: true },
-      ],
+  title: "ENGINEERING",
+  items: [
+    {
+      label: "Curious",
+      hasArrow: true,
     },
+    {
+      label: "Build First",
+      hasArrow: true,
+    },
+    {
+      label: "Think in Systems",
+      hasArrow: true,
+    },
+    {
+      label: "Keep Improving",
+      hasArrow: true,
+      hasPulse: true,
+    },
+  ],
+},
     
     timeline: {
       label: "Started Coding",

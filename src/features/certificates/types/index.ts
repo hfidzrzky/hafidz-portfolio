@@ -17,7 +17,7 @@ export interface CertificateItem {
 }
 
 export interface CertificatesHeaderData {
-  sectionTag: string
+  badge: string
   titlePart1: string
   tapeText: string
   quoteLines: string[]

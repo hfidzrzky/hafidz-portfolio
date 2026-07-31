@@ -2,7 +2,7 @@ import { ContactData } from '../types'
 
 export const CONTACT_DATA: ContactData = {
   header: {
-    sectionTag: 'CONTACT',
+    badge: 'CONTACT',
     headlineLine1: 'Have An Idea?',
     headlineLine2: "Let's Build It.",
     quoteText:

@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode for Tailwind CSS v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
 html {
@@ -20,7 +19,6 @@ html {
 }
 
 @theme {
-  /* Color Tokens */
   --color-dark-bg: #080B12;
   --color-dark-surface: #121620;
   --color-dark-border: #1E2536;

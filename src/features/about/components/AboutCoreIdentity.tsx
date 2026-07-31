@@ -16,7 +16,7 @@ export function AboutCoreIdentity({ data }: AboutCoreIdentityProps) {
       <div className="space-y-6">
         {/* Subheading Badge */}
         <FadeIn delay={0.1}>
-          <Badge variant="accent">{data.badge}</Badge>
+          <Badge>{data.badge}</Badge>
         </FadeIn>
 
         {/* Headline */}

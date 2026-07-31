@@ -19,11 +19,12 @@ export interface CtaButton {
 
 export interface TerminalCardItem {
   label: string;
-  isHighlighted: boolean;
+  hasArrow?: boolean;
   hasPulse?: boolean;
 }
 
 export interface TerminalCardData {
+  title: string;
   items: TerminalCardItem[];
 }
 
@@ -56,7 +57,6 @@ export interface HeroPortraitData {
 
 export interface HeroData {
   sectionNumber: string;
-  badge: string;
   headline: {
     line1: string;
     line2: string;
