@@ -15,7 +15,6 @@ export function StoriesHeader({ data }: StoriesHeaderProps) {
   return (
     <div className="relative flex flex-col justify-center mb-24 md:mb-32 pt-6 md:pt-10">
       <FadeIn delay={0.1} direction="up" className="max-w-5xl">
-        {/* Category Tag & Live Status */}
         <div className="flex flex-wrap items-center gap-4 mb-6 md:mb-10">
           <Badge>{data.sectionTag}</Badge>
           <div className="hidden md:block h-px w-12 bg-accent/30" />
@@ -25,7 +24,6 @@ export function StoriesHeader({ data }: StoriesHeaderProps) {
           </span>
         </div>
 
-        {/* Main Heading */}
         <h1 className="font-sans text-[44px] sm:text-[64px] md:text-[80px] lg:text-[100px] font-bold tracking-tighter uppercase leading-[0.9] mb-8 md:mb-10 text-slate-900 dark:text-white relative z-10">
           {data.titlePart1}
           <br />

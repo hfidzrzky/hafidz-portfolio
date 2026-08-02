@@ -28,7 +28,6 @@ export function ContactForm({
       onSubmit={onSubmit}
       className="flex flex-col gap-10 transition-opacity duration-300"
     >
-      {/* 01 / YOUR NAME */}
       <div className="group relative">
         <label
           htmlFor="name"
@@ -45,10 +44,9 @@ export function ContactForm({
           placeholder="What's your name?"
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
         />
-        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-focus-within:w-full" />
+        <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
       </div>
 
-      {/* 02 / YOUR EMAIL */}
       <div className="group relative">
         <label
           htmlFor="email"
@@ -65,7 +63,7 @@ export function ContactForm({
           placeholder="Where can I reach you?"
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
         />
-        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-focus-within:w-full" />
+        <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
         {emailError && (
           <div className="text-red-500 dark:text-red-400 font-mono text-[10px] mt-2">
             {emailError}
@@ -73,7 +71,6 @@ export function ContactForm({
         )}
       </div>
 
-      {/* 03 / WHAT'S THIS ABOUT? */}
       <div className="group relative">
         <label
           htmlFor="subject"
@@ -100,10 +97,9 @@ export function ContactForm({
             </option>
           ))}
         </select>
-        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-focus-within:w-full" />
+        <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
       </div>
 
-      {/* 04 / WHAT'S ON YOUR MIND? */}
       <div className="group relative">
         <label
           htmlFor="message"
@@ -118,12 +114,11 @@ export function ContactForm({
           value={formData.message}
           onChange={(e) => onChange('message', e.target.value)}
           placeholder="Tell me a little about your idea, project, or anything you'd like to discuss."
-          className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors resize-y min-h-[140px]"
+          className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors resize-y min-h-35"
         />
-        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-focus-within:w-full" />
+        <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
       </div>
 
-      {/* SUBMIT BUTTON (Minimalist Border & Accent Hover) */}
       <div className="pt-4">
         <button
           type="submit"

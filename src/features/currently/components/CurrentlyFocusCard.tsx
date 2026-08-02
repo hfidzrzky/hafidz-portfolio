@@ -29,7 +29,6 @@ export function CurrentlyFocusCard({ card, index }: CurrentlyFocusCardProps) {
   return (
     <FadeIn delay={index * 0.15} direction="up">
       <div className="group bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-6 md:p-8 rounded-lg hover-glow transition-all duration-300 relative overflow-hidden">
-        {/* Subtle BG Accent Line */}
         <div
           className={cn(
             'absolute top-0 left-0 w-1 h-full transition-colors',
@@ -39,7 +38,6 @@ export function CurrentlyFocusCard({ card, index }: CurrentlyFocusCardProps) {
           )}
         />
 
-        {/* Card Top Header */}
         <div className="flex flex-wrap justify-between items-start mb-6 gap-4">
           <div
             className={cn(
@@ -64,7 +62,6 @@ export function CurrentlyFocusCard({ card, index }: CurrentlyFocusCardProps) {
           </div>
         </div>
 
-        {/* Title & Description */}
         <h3
           className={cn(
             'font-sans text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-3 tracking-tight transition-colors',

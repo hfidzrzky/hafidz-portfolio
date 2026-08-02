@@ -19,8 +19,7 @@ export function ProjectCard({
   return (
     <FadeIn delay={index * 0.15} direction="up">
       <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-lg group hover-glow transition-all flex flex-col justify-between overflow-hidden">
-        {/* Card Thumbnail Preview */}
-        <div className="relative h-[200px] w-full bg-gradient-to-tr from-[#0D121F] via-[#161D2E] to-[#1E293B] border-b border-light-border dark:border-dark-border overflow-hidden">
+        <div className="relative h-50 w-full bg-linear-to-tr from-[#0D121F] via-[#161D2E] to-[#1E293B] border-b border-light-border dark:border-dark-border overflow-hidden">
           <Image
             src={project.thumbnailImage}
             alt={project.title}
@@ -33,8 +32,7 @@ export function ProjectCard({
           </div>
         </div>
 
-        {/* Card Body */}
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-6 flex flex-col grow">
           <div className="flex justify-between items-start mb-3">
             <span className="font-mono text-[10px] text-accent uppercase tracking-widest">
               {project.category}

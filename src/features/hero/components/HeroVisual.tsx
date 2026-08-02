@@ -16,12 +16,9 @@ interface HeroVisualProps {
 export function HeroVisual({ portrait, cards }: HeroVisualProps) {
   return (
     <div className="lg:col-span-6 relative flex justify-center items-center h-95 sm:h-120 lg:h-125 mt-8 lg:mt-0 w-full max-w-full overflow-hidden sm:overflow-visible transform-gpu">
-      {/* Central Portrait */}
       <HeroPortrait portrait={portrait} />
 
-      {/* Floating Cards Container */}
       <div className="absolute inset-0 z-20 w-full h-full pointer-events-none">
-        {/* Card 1: Terminal (Top Left) */}
         <FloatCard
           depth={1.2}
           floatDuration={6}
@@ -30,7 +27,6 @@ export function HeroVisual({ portrait, cards }: HeroVisualProps) {
           <TerminalCard data={cards.terminal} />
         </FloatCard>
 
-        {/* Card 2: Timeline (Top Right) */}
         <FloatCard
           depth={0.8}
           floatDelay={1}
@@ -40,7 +36,6 @@ export function HeroVisual({ portrait, cards }: HeroVisualProps) {
           <TimelineCard data={cards.timeline} />
         </FloatCard>
 
-        {/* Card 3: Location (Bottom Left) */}
         <FloatCard
           depth={1.5}
           floatDelay={0.5}
@@ -50,7 +45,6 @@ export function HeroVisual({ portrait, cards }: HeroVisualProps) {
           <LocationCard data={cards.location} />
         </FloatCard>
 
-        {/* Card 4: Currently (Bottom Right) */}
         <FloatCard
           depth={0.9}
           floatDelay={1.5}

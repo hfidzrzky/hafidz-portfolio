@@ -13,8 +13,7 @@ interface PhilosophyCardProps {
 export function PhilosophyCard({ layer, index }: PhilosophyCardProps) {
   return (
     <FadeIn delay={index * 0.1} direction="up" className="h-full">
-      <div className="bg-gradient-to-br from-light-surface to-slate-100 dark:from-dark-surface dark:to-dark-bg border border-light-border dark:border-dark-border/50 p-6 rounded-lg flex flex-col justify-center relative overflow-hidden h-full shadow-sm">
-        {/* Scanline Background */}
+      <div className="bg-linear-to-br from-light-surface to-slate-100 dark:from-dark-surface dark:to-dark-bg border border-light-border dark:border-dark-border/50 p-6 rounded-lg flex flex-col justify-center relative overflow-hidden h-full shadow-sm">
         <div className="absolute inset-0 scanline opacity-10 dark:opacity-20 pointer-events-none"></div>
 
         <div className="relative z-10">

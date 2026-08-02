@@ -8,7 +8,6 @@ export function TerminalCard({ data }: TerminalCardProps) {
   return (
     <div className="bg-light-surface/95 dark:bg-dark-surface/95 backdrop-blur-md border border-light-border dark:border-dark-border rounded-lg shadow-2xl overflow-hidden hover-glow transition-all duration-300">
 
-      {/* Header */}
       <div className="flex items-center justify-between px-4 py-2 border-b border-light-border dark:border-dark-border">
 
         <div className="flex items-center gap-2">
@@ -22,7 +21,6 @@ export function TerminalCard({ data }: TerminalCardProps) {
 
       </div>
 
-      {/* Content */}
       <div className="px-4 py-4">
         <ul className="space-y-3 font-mono text-[11px] md:text-xs text-slate-500 dark:text-slate-400">
           {data.items.map((item, index) => (

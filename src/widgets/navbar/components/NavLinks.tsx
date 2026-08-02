@@ -39,4 +39,3 @@ export function NavLinks({ onItemClick, className }: NavLinksProps) {
     </nav>
   )
 }
-

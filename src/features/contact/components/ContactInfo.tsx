@@ -46,14 +46,12 @@ function SocialIcon({ platform }: { platform: SocialLink['platform'] }) {
 export function ContactInfo({ data }: ContactInfoProps) {
   return (
     <FadeIn delay={0.2} direction="up" className="lg:col-span-4 flex flex-col gap-14">
-      {/* SECTION SUB-HEADER */}
       <div className="border-b border-light-border dark:border-dark-border pb-4 mb-2">
         <h2 className="font-sans text-xl font-bold uppercase tracking-widest text-slate-900 dark:text-white">
           {data.title}
         </h2>
       </div>
 
-      {/* DIRECT EMAIL */}
       <div>
         <h3 className="font-mono text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-3">
           {data.emailLabel}
@@ -67,7 +65,6 @@ export function ContactInfo({ data }: ContactInfoProps) {
         </a>
       </div>
 
-      {/* SOCIAL LINKS */}
       <div>
         <h3 className="font-mono text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-4">
           {data.socialTitle}
@@ -91,7 +88,6 @@ export function ContactInfo({ data }: ContactInfoProps) {
         </div>
       </div>
 
-      {/* AVAILABILITY */}
       <div>
         <h3 className="font-mono text-[10px] text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
           <span className="relative flex h-2 w-2">

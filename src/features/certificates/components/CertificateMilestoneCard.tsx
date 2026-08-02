@@ -17,7 +17,7 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
   return (
     <FadeIn delay={0.1 * (index % 6)} direction="up" className="h-full">
       <div
-        className="flex flex-col justify-between min-h-[440px] h-full bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-xl overflow-hidden group hover:border-accent/50 hover:shadow-xl transition-all duration-500 p-2.5 relative"
+        className="flex flex-col justify-between min-h-110 h-full bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-xl overflow-hidden group hover:border-accent/50 hover:shadow-xl transition-all duration-500 p-2.5 relative"
       >
         {/* Top Badge Overlay */}
         <div className="absolute top-5 right-5 z-20 flex items-center gap-2">
@@ -30,7 +30,7 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
         {/* Thumbnail Image Wrapper (Click to Preview) */}
         <div
           onClick={() => onPreview(certificate)}
-          className="relative h-[200px] w-full rounded-lg overflow-hidden bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border/50 cursor-pointer"
+          className="relative h-50 w-full rounded-lg overflow-hidden bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border/50 cursor-pointer"
         >
           <div className="absolute inset-0 bg-light-bg/40 dark:bg-dark-bg/60 z-10 transition-opacity duration-500 group-hover:opacity-0 mix-blend-color" />
           <Image
@@ -50,8 +50,7 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
         </div>
 
         {/* Card Body Content */}
-        <div className="flex-grow flex flex-col px-4 pt-4 pb-3">
-          {/* Title */}
+        <div className="grow flex flex-col px-4 pt-4 pb-3">
           <h4
             onClick={() => onPreview(certificate)}
             className="font-sans text-base font-bold text-slate-900 dark:text-white mb-2 line-clamp-2 uppercase leading-snug group-hover:text-accent transition-colors cursor-pointer"
@@ -59,7 +58,6 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
             {certificate.title}
           </h4>
 
-          {/* Meta Info */}
           <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] text-slate-500 dark:text-slate-400 mb-3 uppercase font-semibold">
             <span className="text-slate-700 dark:text-slate-300">{certificate.provider}</span>
             <span className="text-light-border dark:text-dark-border">•</span>
@@ -70,7 +68,6 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
             {certificate.description}
           </p>
 
-          {/* Tech Skill Tags */}
           {certificate.tags && certificate.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-4 mt-auto">
               {certificate.tags.slice(0, 3).map((tag) => (
@@ -86,7 +83,6 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
 
           {/* Footer Actions (Distinct Preview & View Credential Buttons) */}
           <div className="pt-3 border-t border-light-border dark:border-dark-border/50 flex items-center justify-between gap-2">
-            {/* Preview Button */}
             <button
               type="button"
               onClick={() => onPreview(certificate)}

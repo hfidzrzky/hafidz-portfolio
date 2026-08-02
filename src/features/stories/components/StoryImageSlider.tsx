@@ -79,8 +79,6 @@ export function StoryImageSlider({
   }
 
   const formattedCounter = `/ ${String(currentIndex + 1).padStart(2, '0')} — ${String(totalImages).padStart(2, '0')}`
-
-  // Position classes to prevent buttons/watermark from hiding behind overlapping text boxes
   const watermarkPositionClass = isEven ? 'top-4 left-4 md:left-6' : 'top-4 right-4 md:right-6'
   const leftArrowClass = isEven ? 'left-4' : 'left-4 lg:left-16'
   const rightArrowClass = isEven ? 'right-4 lg:right-16' : 'right-4'
@@ -88,7 +86,7 @@ export function StoryImageSlider({
   return (
     <>
       <div
-        className="group relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden bg-light-surface dark:bg-dark-surface rounded-sm cursor-pointer select-none border border-light-border dark:border-dark-border hover:border-accent/40 transition-colors duration-500"
+        className="group relative w-full aspect-4/3 md:aspect-16/10 overflow-hidden bg-light-surface dark:bg-dark-surface rounded-sm cursor-pointer select-none border border-light-border dark:border-dark-border hover:border-accent/40 transition-colors duration-500"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -101,7 +99,6 @@ export function StoryImageSlider({
           </span>
         </div>
 
-        {/* Expand / Lightbox Hover Hint Icon */}
         <div
           className={`absolute top-4 ${isEven ? 'right-4 lg:right-16' : 'left-4 lg:left-16'} z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none`}
         >
@@ -110,7 +107,6 @@ export function StoryImageSlider({
           </span>
         </div>
 
-        {/* Main Image View */}
         <div className="relative w-full h-full">
           <AnimatePresence mode="wait">
             <motion.div
@@ -129,13 +125,12 @@ export function StoryImageSlider({
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 unoptimized
                 priority={currentIndex === 0}
-                className="object-cover filter grayscale-[15%] brightness-[0.9] dark:brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-100 dark:group-hover:brightness-95 group-hover:scale-[1.03] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu"
+                className="object-cover filter grayscale-15% brightness-[0.9] dark:brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-100 dark:group-hover:brightness-95 group-hover:scale-[1.03] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu"
               />
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Desktop Navigation Arrows (Fade-in on Hover, Hidden on Mobile, Disabled at boundaries) */}
         {totalImages > 1 && (
           <>
             <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 ${leftArrowClass} z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
@@ -172,7 +167,6 @@ export function StoryImageSlider({
           </>
         )}
 
-        {/* Segmented Micro-Dashes Indicator */}
         {totalImages > 1 && (
           <div
             className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 pointer-events-auto"
@@ -197,7 +191,6 @@ export function StoryImageSlider({
           </div>
         )}
 
-        {/* Dynamic Corner Accents */}
         {isEven ? (
           <>
             <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-slate-400 dark:border-white/30 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -211,7 +204,6 @@ export function StoryImageSlider({
         )}
       </div>
 
-      {/* Lightbox Modal */}
       <StoryLightbox
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}

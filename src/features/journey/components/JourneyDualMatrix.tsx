@@ -8,7 +8,6 @@ interface JourneyDualMatrixProps {
 export function JourneyDualMatrix({ data }: JourneyDualMatrixProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-light-border dark:bg-dark-border mb-6 max-w-3xl border border-light-border dark:border-dark-border">
-      {/* Left: Academic */}
       <div className="bg-light-surface dark:bg-dark-surface p-5 md:p-6 hover:bg-slate-100 dark:hover:bg-[#151A26] transition-colors">
         <div className="font-mono text-[9px] text-slate-500 dark:text-slate-500 uppercase tracking-widest mb-2">
           {data.academic.category}
@@ -21,9 +20,7 @@ export function JourneyDualMatrix({ data }: JourneyDualMatrixProps) {
         </p>
       </div>
 
-      {/* Right: Practical */}
       <div className="bg-light-surface dark:bg-dark-surface p-5 md:p-6 hover:bg-slate-100 dark:hover:bg-[#151A26] transition-colors relative">
-        {/* Plus symbol binding them */}
         <div className="hidden sm:flex absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-slate-50 dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-full items-center justify-center font-mono text-accent text-xs z-10">
           +
         </div>

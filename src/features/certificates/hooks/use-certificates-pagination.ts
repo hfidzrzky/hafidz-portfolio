@@ -21,7 +21,6 @@ export function useCertificatesPagination<T>({ items, pageSize = 6 }: UsePaginat
     const targetPage = Math.max(1, Math.min(page, totalPages))
     setCurrentPage(targetPage)
 
-    // Smooth scroll to certificates grid header if out of view
     const gridElement = document.getElementById('certificates-grid-section')
     if (gridElement) {
       gridElement.scrollIntoView({ behavior: 'smooth', block: 'start' })

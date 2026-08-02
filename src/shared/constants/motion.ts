@@ -1,9 +1,6 @@
 export const MOTION_EASINGS = {
-  // Ultra-smooth cubic-bezier curve for premium, fluid feel (cubic-bezier(0.22, 1, 0.36, 1))
   smooth: [0.22, 1, 0.36, 1] as const,
-  // Standard ease-out curve for fast UI feedback
   easeOut: [0, 0, 0.2, 1] as const,
-  // Subtle spring physics configuration for interactive elements
   springInteractive: { damping: 25, stiffness: 120 },
 }
 

@@ -18,13 +18,11 @@ export function StoryCard({ story, index }: StoryCardProps) {
   return (
     <FadeIn delay={index * 0.15} direction="up">
       <article className="group relative">
-        {/* Horizontal connector line from main vertical thread */}
-        <div className="hidden md:block absolute top-[50%] -left-8 w-8 h-[1px] bg-light-border dark:bg-dark-border -z-10" />
+        <div className="hidden md:block absolute top-[50%] -left-8 w-8 h-px bg-light-border dark:bg-dark-border -z-10" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
           {isEven ? (
             <>
-              {/* Image Container (Col 7 - Order 1) */}
               <div className="lg:col-span-7 relative z-10">
                 <StoryImage
                   imageUrl={story.imageUrl}
@@ -35,7 +33,6 @@ export function StoryCard({ story, index }: StoryCardProps) {
                 />
               </div>
 
-              {/* Content Box (Col 5 - Order 2 with left overlap) */}
               <div className="lg:col-span-5 relative z-20 lg:-ml-12 mt-4 lg:mt-0">
                 <StoryContent
                   category={story.category}
@@ -47,7 +44,6 @@ export function StoryCard({ story, index }: StoryCardProps) {
             </>
           ) : (
             <>
-              {/* Content Box (Col 5 - Desktop Order 1 with right overlap) */}
               <div className="lg:col-span-5 relative z-20 lg:-mr-12 order-2 lg:order-1 mt-4 lg:mt-0">
                 <StoryContent
                   category={story.category}
@@ -57,7 +53,6 @@ export function StoryCard({ story, index }: StoryCardProps) {
                 />
               </div>
 
-              {/* Image Container (Col 7 - Desktop Order 2) */}
               <div className="lg:col-span-7 relative z-10 order-1 lg:order-2">
                 <StoryImage
                   imageUrl={story.imageUrl}

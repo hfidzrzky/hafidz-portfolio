@@ -28,8 +28,6 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
   const [userViewMode, setUserViewMode] = useState<'pdf' | 'image' | null>(null)
   const [prevCertId, setPrevCertId] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
-
-  // Deferred PDF loading states for smooth 60fps modal opening
   const [isPdfReady, setIsPdfReady] = useState(false)
   const [isPdfLoaded, setIsPdfLoaded] = useState(false)
 
@@ -42,17 +40,13 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Reset user view mode selection during render when target certificate changes
   if (certificate && certificate.id !== prevCertId) {
     setPrevCertId(certificate.id)
     setUserViewMode(null)
   }
 
-  // On mobile viewports, default to image view mode so mobile browsers render inline without broken iframe prompts
   const defaultViewMode = certificate?.pdfUrl && !isMobile ? 'pdf' : 'image'
   const viewMode = userViewMode ?? defaultViewMode
-
-  // Track active PDF key to reset loading state safely during render (no sync setState in useEffect)
   const currentPdfKey = `${certificate?.id || ''}-${viewMode}`
   const [prevPdfKey, setPrevPdfKey] = useState<string>('')
 
@@ -62,7 +56,6 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
     setIsPdfLoaded(false)
   }
 
-  // Pure side-effect timer to mount PDF iframe after modal transition completes
   useEffect(() => {
     if (!certificate || viewMode !== 'pdf') return
 
@@ -119,15 +112,14 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/80 dark:bg-black/90 backdrop-blur-md animate-fadeIn select-none"
+      className="fixed inset-0 z-99999 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/80 dark:bg-black/90 backdrop-blur-md animate-fadeIn select-none"
       onClick={onClose}
     >
-      {/* Floating Close Button */}
       <button
         onClick={onClose}
         type="button"
         aria-label="Close Preview"
-        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[100000] p-3 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white hover:bg-accent hover:text-slate-950 transition-all duration-300 border border-slate-200 dark:border-white/20 shadow-2xl group flex items-center justify-center cursor-pointer"
+        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-100000 p-3 rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white hover:bg-accent hover:text-slate-950 transition-all duration-300 border border-slate-200 dark:border-white/20 shadow-2xl group flex items-center justify-center cursor-pointer"
       >
         <X className="w-5 h-5 group-hover:scale-110 transition-transform" />
       </button>
@@ -177,10 +169,10 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
           )}
         </div>
 
-        {/* Certificate Display Area - Adaptive background & isolated rendering */}
-        <div className="relative flex-grow w-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden p-2 sm:p-4 min-h-[340px] sm:min-h-[500px]">
+        {/* Certificate Display Area */}
+        <div className="relative grow w-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden p-2 sm:p-4 min-h-85 sm:min-h-125">
           {viewMode === 'pdf' && pdfSrc ? (
-            <div className="relative w-full h-full min-h-[340px] sm:min-h-[500px] max-h-[72vh] rounded-lg overflow-hidden border border-slate-300 dark:border-white/10 shadow-2xl bg-white dark:bg-slate-950 flex items-center justify-center isolate">
+            <div className="relative w-full h-full min-h-85 sm:min-h-125 max-h-[72vh] rounded-lg overflow-hidden border border-slate-300 dark:border-white/10 shadow-2xl bg-white dark:bg-slate-950 flex items-center justify-center isolate">
               {/* Skeleton Loader Overlay */}
               {(!isPdfReady || !isPdfLoaded) && (
                 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-slate-100 dark:bg-slate-950 animate-pulse p-6">
@@ -191,14 +183,13 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
                 </div>
               )}
 
-              {/* High-Performance Smooth PDF Iframe */}
               {isPdfReady && (
                 <iframe
                   src={`${pdfSrc}#toolbar=0&navpanes=0&view=FitH`}
                   title={certificate.title}
                   loading="lazy"
                   onLoad={() => setIsPdfLoaded(true)}
-                  className={`w-full h-full min-h-[340px] sm:min-h-[500px] max-h-[72vh] border-0 outline-none transition-opacity duration-300 transform-gpu pointer-events-auto ${
+                  className={`w-full h-full min-h-85 sm:min-h-125 max-h-[72vh] border-0 outline-none transition-opacity duration-300 transform-gpu pointer-events-auto ${
                     isPdfLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
@@ -233,7 +224,7 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
             </p>
           </div>
 
-          <div className="w-full md:w-auto flex flex-wrap items-center justify-end gap-2.5 flex-shrink-0">
+          <div className="w-full md:w-auto flex flex-wrap items-center justify-end gap-2.5 shrink-0">
             {pdfSrc && (
               <>
                 <a
@@ -274,4 +265,3 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
     document.body
   )
 }
-

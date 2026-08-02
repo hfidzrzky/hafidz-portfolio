@@ -13,10 +13,8 @@ interface JourneyItemCardProps {
 export function JourneyItemCard({ item, index }: JourneyItemCardProps) {
   return (
     <FadeIn delay={index * 0.12} direction="up" className="relative flex flex-col md:flex-row mb-20 group">
-      {/* Timeline Node Dot */}
       <TimelineNode />
 
-      {/* Year / Period Column */}
       <div className="md:w-[130px] pl-10 md:pl-0 md:text-right md:pr-10 pt-1">
         {item.yearEnd ? (
           <>
@@ -48,17 +46,14 @@ export function JourneyItemCard({ item, index }: JourneyItemCardProps) {
 
       {/* Content Column */}
       <div className="mt-5 md:mt-0 pl-10 md:pl-10 flex-1">
-        {/* Category Tag */}
         <div className="font-mono text-[10px] text-accent tracking-widest uppercase mb-2">
           {item.tag}
         </div>
 
-        {/* Title */}
         <h3 className="font-sans text-2xl md:text-3xl font-bold text-slate-900 dark:text-white uppercase mb-5 tracking-tight group-hover:translate-x-1 transition-transform duration-300">
           {item.title}
         </h3>
 
-        {/* Quotes / Subtitles */}
         {item.quotes.length > 0 && (
           <div className="border-l border-light-border dark:border-dark-border pl-4 font-mono text-xs text-accent uppercase tracking-widest mb-4 space-y-1">
             {item.quotes.map((q) => (
@@ -67,7 +62,6 @@ export function JourneyItemCard({ item, index }: JourneyItemCardProps) {
           </div>
         )}
 
-        {/* Description Paragraph */}
         {item.description && (
           <p className="font-mono text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mb-6">
             {item.description}
@@ -76,7 +70,6 @@ export function JourneyItemCard({ item, index }: JourneyItemCardProps) {
 
         {item.dualMatrix && <JourneyDualMatrix data={item.dualMatrix} />}
 
-        {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
           {item.tags.map((tag) =>
             tag.variant === 'accent' ? (

@@ -22,18 +22,14 @@ export function ContactContent() {
 
   return (
     <div className="w-full pl-0 md:pl-16">
-      {/* 01. HERO / HEADER INTRO */}
       <ContactHero data={CONTACT_DATA.header} />
 
-      {/* 02. MAIN TWO-COLUMN CONTACT AREA */}
       <div
         id="contact-area"
         className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 scroll-mt-24"
       >
-        {/* LEFT COLUMN: CONTACT INFO */}
         <ContactInfo data={CONTACT_DATA.info} />
 
-        {/* RIGHT COLUMN: CONTACT FORM & DYNAMIC STATES */}
         <div className="lg:col-span-8">
           <FadeIn delay={0.3} direction="up">
             <div className="border-b border-light-border dark:border-dark-border pb-4 mb-10">
@@ -42,7 +38,7 @@ export function ContactContent() {
               </h2>
             </div>
 
-            <div className="relative min-h-[400px]">
+            <div className="relative min-h-100">
               {status === 'success' ? (
                 <ContactSuccessState onReset={handleReset} />
               ) : status === 'error' ? (

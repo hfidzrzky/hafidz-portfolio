@@ -30,15 +30,13 @@ export function StoryContent({
   }
 
   return (
-    <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-6 sm:p-8 md:p-12 shadow-xl dark:shadow-2xl transition-all duration-500 hover:border-accent/40 dark:hover:border-dark-border/80 flex flex-col justify-between min-h-[380px] rounded-sm">
+    <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-6 sm:p-8 md:p-12 shadow-xl dark:shadow-2xl transition-all duration-500 hover:border-accent/40 dark:hover:border-dark-border/80 flex flex-col justify-between min-h-95 rounded-sm">
       <div>
-        {/* Category Header */}
         <div className="flex items-center gap-3 font-mono text-[10px] md:text-xs text-accent uppercase tracking-[0.2em] mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
           <span>{category}</span>
         </div>
 
-        {/* Story Title */}
         <h3 className="font-sans text-2xl sm:text-3xl md:text-[40px] font-bold uppercase tracking-tight text-slate-900 dark:text-white mb-6 leading-[1.1]">
           {title.map((line, idx) => (
             <React.Fragment key={idx}>
@@ -49,15 +47,13 @@ export function StoryContent({
         </h3>
 
         {/* Divider Line */}
-        <div className="w-12 h-[2px] bg-accent/50 mb-6" />
+        <div className="w-12 h-0.5 bg-accent/50 mb-6" />
 
-        {/* Description Paragraph */}
         <p className="font-mono text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-[1.8]">
           {description}
         </p>
       </div>
 
-      {/* Editorial Meta Footer */}
       <div className="mt-8 pt-6 border-t border-light-border dark:border-dark-border/50 flex items-center justify-between opacity-90 group-hover:opacity-100 transition-opacity duration-300">
         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
           {renderMetaIcon()}

@@ -11,15 +11,12 @@ interface JourneyTimelineProps {
 export function JourneyTimeline({ items, endStatus }: JourneyTimelineProps) {
   return (
     <div className="relative w-full max-w-5xl mx-auto">
-      {/* Main Vertical Axis Line */}
-      <div className="absolute left-[15px] md:left-[160px] top-3 bottom-10 w-[1px] bg-light-border dark:bg-dark-border" />
+      <div className="absolute left-3.75 md:left-40 top-3 bottom-10 w-px bg-light-border dark:bg-dark-border" />
 
-      {/* Timeline Items */}
       {items.map((item, index) => (
         <JourneyItemCard key={item.id} item={item} index={index} />
       ))}
 
-      {/* Ending Open Node */}
       <JourneyEndNode statusText={endStatus} />
     </div>
   );

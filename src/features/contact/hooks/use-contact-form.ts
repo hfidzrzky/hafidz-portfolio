@@ -44,9 +44,7 @@ export function useContactForm() {
     setEmailError(null)
     setStatus('submitting')
 
-    // Simulate network submission request
     setTimeout(() => {
-      // 90% success rate simulation matching contact.html (Math.random() > 0.1)
       const isSuccess = Math.random() > 0.1
       if (isSuccess) {
         setStatus('success')

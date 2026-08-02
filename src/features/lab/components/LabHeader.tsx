@@ -24,7 +24,6 @@ export function LabHeader({ data }: LabHeaderProps) {
           {data.titleSuffix}
         </h2>
 
-        {/* Manifesto Box */}
         <div className="border-l-2 border-accent pl-5 max-w-2xl mt-6 relative">
           <p className="font-mono text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
             {data.manifesto}
@@ -32,9 +31,8 @@ export function LabHeader({ data }: LabHeaderProps) {
         </div>
       </FadeIn>
 
-      {/* Status Legend Card */}
       <FadeIn delay={0.25} direction="up">
-        <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-4 md:p-5 flex flex-col gap-3 min-w-[200px] sm:min-w-[220px] rounded-lg shadow-sm">
+        <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-4 md:p-5 flex flex-col gap-3 min-w-50 sm:min-w-55 rounded-lg shadow-sm">
           <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">
             Technology Status
           </span>
@@ -52,7 +50,7 @@ export function LabHeader({ data }: LabHeaderProps) {
                 className="flex items-center gap-3 font-mono text-[10px] md:text-xs uppercase text-slate-700 dark:text-slate-300"
               >
                 <div
-                  className={`w-2.5 h-2.5 flex-shrink-0 ${indicatorStyles}`}
+                  className={`w-2.5 h-2.5 shrink-0 ${indicatorStyles}`}
                 />
                 <span className="tracking-wider">{item.label}</span>
               </div>

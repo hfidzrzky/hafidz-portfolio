@@ -11,7 +11,7 @@ interface AboutContentProps {
 export function AboutContent({ data }: AboutContentProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-start relative mt-10">
-      {/* Left Column: Core Identity (Sticky on Desktop) */}
+      {/* Left Column: Core Identity */}
       <AboutCoreIdentity data={data.header} />
 
       {/* Right Column: Process & Principles */}

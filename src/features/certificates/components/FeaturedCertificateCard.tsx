@@ -19,9 +19,9 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
         {/* Featured Image Box */}
         <div
           onClick={() => onPreview(certificate)}
-          className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:max-h-[360px] rounded-xl bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-2 sm:p-2.5 transition-all duration-500 group-hover:border-accent/50 overflow-hidden mb-6 shadow-md cursor-pointer"
+          className="relative w-full aspect-16/10 sm:aspect-video lg:max-h-90 rounded-xl bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border p-2 sm:p-2.5 transition-all duration-500 group-hover:border-accent/50 overflow-hidden mb-6 shadow-md cursor-pointer"
         >
-          {/* Category & Verification Badge */}
+
           <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
             <CategoryBadge category={certificate.category} />
           </div>
@@ -41,6 +41,7 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
           {/* Image Wrapper */}
           <div className="relative w-full h-full rounded-lg overflow-hidden border border-light-border dark:border-dark-border/50 bg-light-bg dark:bg-dark-bg">
             <div className="absolute inset-0 bg-light-bg/20 dark:bg-dark-bg/40 z-10 transition-opacity duration-700 group-hover:opacity-0 mix-blend-color" />
+
             <Image
               src={certificate.imageUrl}
               alt={certificate.imageAlt}
@@ -48,7 +49,7 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
               unoptimized
               className="w-full h-full object-cover object-center grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
             />
-            {/* Zoom Overlay Hint */}
+
             <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/40 backdrop-blur-[2px]">
               <span className="font-mono text-xs font-bold text-white bg-slate-900/90 px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform">
                 <Eye className="w-4 h-4 text-accent" />
@@ -58,7 +59,6 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
           </div>
         </div>
 
-        {/* Featured Metadata & Details */}
         <div className="flex flex-col border-l border-light-border dark:border-dark-border pl-6 sm:pl-8 py-1">
           <div className="font-mono text-[10px] font-bold text-slate-500 tracking-[0.2em] mb-3 uppercase">
             {certificate.number} {'//'} FEATURED CREDENTIAL
@@ -68,7 +68,6 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
             {certificate.title}
           </h3>
 
-          {/* Meta Info */}
           <div className="flex flex-wrap items-center gap-2.5 font-mono text-[11px] text-slate-500 dark:text-slate-400 mb-4 uppercase">
             <span className="text-slate-800 dark:text-white font-semibold">
               {certificate.provider}
@@ -83,7 +82,6 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
             {certificate.description}
           </p>
 
-          {/* Tech Skill Tags */}
           {certificate.tags && certificate.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-8">
               {certificate.tags.map((tag) => (
@@ -97,9 +95,7 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
             </div>
           )}
 
-          {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-3">
-            {/* Preview Button */}
             <button
               type="button"
               onClick={() => onPreview(certificate)}
@@ -109,7 +105,6 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
               <Eye className="w-3.5 h-3.5 text-slate-400 group-hover/btn:text-accent transition-colors" />
             </button>
 
-            {/* View Credential Button */}
             {certificate.credentialUrl &&
               (certificate.credentialUrl.startsWith('http://') ||
                 certificate.credentialUrl.startsWith('https://')) && (

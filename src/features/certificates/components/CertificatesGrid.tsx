@@ -31,11 +31,11 @@ export function CertificatesGrid({ milestones, onPreview }: CertificatesGridProp
       {/* Section Divider & Header Label */}
       <FadeIn delay={0.1} direction="up">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
-          <div className="flex items-center gap-4 flex-grow">
+          <div className="flex items-center gap-4 grow">
             <span className="font-mono text-sm font-medium text-slate-500 tracking-widest uppercase">
               {String(totalItems).padStart(2, '0')} Certification Milestones
             </span>
-            <div className="h-px bg-light-border dark:bg-dark-border flex-grow" />
+            <div className="h-px bg-light-border dark:bg-dark-border grow" />
           </div>
 
           {/* Indicator Info */}
@@ -62,15 +62,13 @@ export function CertificatesGrid({ milestones, onPreview }: CertificatesGridProp
       {totalPages > 1 && (
         <FadeIn delay={0.2} direction="up">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-light-border dark:border-dark-border/80">
-            {/* Page Count Detail */}
+
             <div className="font-mono text-xs text-slate-500 dark:text-slate-400">
               Page <span className="text-accent font-bold">{currentPage}</span> of{' '}
               <span className="text-slate-900 dark:text-white font-bold">{totalPages}</span>
             </div>
 
-            {/* Pagination Controls */}
             <div className="flex items-center gap-2">
-              {/* Previous Button */}
               <button
                 type="button"
                 onClick={prevPage}
@@ -106,7 +104,6 @@ export function CertificatesGrid({ milestones, onPreview }: CertificatesGridProp
                 ))}
               </div>
 
-              {/* Next Button */}
               <button
                 type="button"
                 onClick={nextPage}

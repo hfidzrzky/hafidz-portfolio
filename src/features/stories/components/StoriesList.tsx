@@ -15,10 +15,8 @@ export function StoriesList({ archives }: StoriesListProps) {
     <div className="flex flex-col gap-24 md:gap-36 mt-16">
       {archives.map((group) => (
         <div key={group.year} className="relative">
-          {/* Static Year Divider */}
           <YearDivider year={group.year} badgeText={group.badgeText} />
 
-          {/* Stories Grid Iteration */}
           <div className="flex flex-col gap-12 md:gap-20 relative z-10">
             {group.stories.map((story, index) => (
               <React.Fragment key={story.id}>

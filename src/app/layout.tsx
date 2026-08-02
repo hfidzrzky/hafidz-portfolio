@@ -6,7 +6,6 @@ import { Navbar } from '@/widgets/navbar/Navbar'
 import { Footer } from '@/widgets/footer/Footer'
 import './globals.css'
 
-// 1. Inisialisasi Font
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -17,7 +16,6 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 })
 
-// 2. Viewport Configuration
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#F8FAFC' },
@@ -27,9 +25,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-// 3. SEO & OpenGraph Social Sharing Metadata
+const siteUrl = 'https://muhammadhafidz-portfolio.vercel.app'
+const ogImageUrl = `${siteUrl}/images/hafidz-img.png`
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://muhammadhafidz-portfolio.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Muhammad Hafidz - Software Engineering In Progress',
     template: '%s | Muhammad Hafidz',
@@ -61,16 +61,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://muhammadhafidz-portfolio.vercel.app',
+    url: siteUrl,
     title: 'Muhammad Hafidz - Software Engineering In Progress',
     description:
       'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
     siteName: 'Muhammad Hafidz Portfolio',
     images: [
       {
-        url: '/images/hafidz-img.png',
+        url: ogImageUrl,
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: 'Muhammad Hafidz - Software Engineering In Progress',
       },
     ],
@@ -81,7 +82,7 @@ export const metadata: Metadata = {
     description:
       'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
     creator: '@hfidzrzky_',
-    images: ['/images/hafidz-img.png'],
+    images: [ogImageUrl],
   },
   robots: {
     index: true,
@@ -118,4 +119,3 @@ export default function RootLayout({
     </html>
   )
 }
-

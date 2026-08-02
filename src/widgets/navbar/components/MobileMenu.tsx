@@ -60,7 +60,7 @@ export function MobileMenu() {
               duration: MOTION_DURATIONS.fast,
               ease: MOTION_EASINGS.smooth,
             }}
-            className="fixed inset-x-0 top-[64px] bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-xl border-b border-light-border dark:border-dark-border p-6 shadow-2xl flex flex-col gap-6 z-50 transform-gpu"
+            className="fixed inset-x-0 top-16 bg-light-bg/95 dark:bg-dark-bg/95 backdrop-blur-xl border-b border-light-border dark:border-dark-border p-6 shadow-2xl flex flex-col gap-6 z-50 transform-gpu"
           >
             <nav className="flex flex-col gap-4 font-mono text-sm uppercase tracking-widest text-slate-600 dark:text-slate-300">
               {MAIN_NAVIGATION.map((item) => (
@@ -71,7 +71,7 @@ export function MobileMenu() {
                   className="relative py-2 border-b border-light-border/50 dark:border-dark-border/50 hover:text-accent dark:hover:text-white transition-colors group flex items-center justify-between"
                 >
                   <span>{item.label}</span>
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
                 </Link>
               ))}
             </nav>
@@ -89,6 +89,4 @@ export function MobileMenu() {
       </AnimatePresence>
     </div>
   )
-
 }
-
