@@ -1,11 +1,16 @@
 'use client'
 
 import React, { useState, useRef, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react'
-import { StoryLightbox } from './StoryLightbox'
 import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
+
+const StoryLightbox = dynamic(
+  () => import('./StoryLightbox').then((mod) => mod.StoryLightbox),
+  { ssr: false }
+)
 
 interface StoryImageSliderProps {
   images: string[]

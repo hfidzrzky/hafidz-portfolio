@@ -1,9 +1,12 @@
-'use client'
-
+import dynamic from 'next/dynamic'
 import { WorkData, ProjectItem } from '../types'
 import { WorkHeader } from './WorkHeader'
 import { ProjectGrid } from './ProjectGrid'
-import { ProjectModal } from './ProjectModal'
+
+const ProjectModal = dynamic(
+  () => import('./ProjectModal').then((mod) => mod.ProjectModal),
+  { ssr: false }
+)
 
 interface WorkContentProps {
   data: WorkData

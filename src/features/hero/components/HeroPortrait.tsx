@@ -28,23 +28,14 @@ export function HeroPortrait({ portrait }: HeroPortraitProps) {
 
       {/* Main Portrait */}
       <div className="relative z-10 w-full max-w-95 sm:max-w-105 md:max-w-115 h-full flex justify-center mx-auto pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{
-            duration: MOTION_DURATIONS.hero,
-            ease: MOTION_EASINGS.smooth,
-            delay: 0.15,
-          }}
-          className="relative h-full flex items-end justify-center w-[320px] sm:w-95 md:w-100 transform-gpu"
-        >
+        <div className="relative h-full flex items-end justify-center w-[320px] sm:w-95 md:w-100 transform-gpu">
           <Image
             src={portrait.image}
             alt="Muhammad Hafidz"
             width={420}
             height={575}
             priority
+            sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
             className="-translate-y-10 w-full h-auto object-contain object-bottom drop-shadow-xl brightness-95 contrast-110 transition-transform duration-500"
             style={{
               WebkitMaskImage:
@@ -52,7 +43,7 @@ export function HeroPortrait({ portrait }: HeroPortraitProps) {
               maskImage: 'linear-gradient(to top, transparent 0%, black 5%)',
             }}
           />
-        </motion.div>
+        </div>
       </div>
     </>
   )

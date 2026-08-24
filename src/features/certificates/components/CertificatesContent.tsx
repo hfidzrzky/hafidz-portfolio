@@ -1,12 +1,17 @@
 'use client'
 
 import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { useCertificates } from '../hooks/use-certificates'
 import { CertificatesHeader } from './CertificatesHeader'
 import { FeaturedCertificateCard } from './FeaturedCertificateCard'
 import { CertificatesGrid } from './CertificatesGrid'
-import { CertificateLightbox } from './CertificateLightbox'
 import { CertificateItem } from '../types'
+
+const CertificateLightbox = dynamic(
+  () => import('./CertificateLightbox').then((mod) => mod.CertificateLightbox),
+  { ssr: false }
+)
 
 export function CertificatesContent() {
   const data = useCertificates()

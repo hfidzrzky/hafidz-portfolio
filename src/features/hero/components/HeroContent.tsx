@@ -16,7 +16,7 @@ export function HeroContent({ data }: HeroContentProps) {
   return (
     <div className="order-2 lg:order-1 lg:col-span-6 relative flex pl-0 md:pl-16 mt-4 lg:mt-12">
       <div className="space-y-5 z-10 w-full">
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0}>
           <HeroHeadline
             line1={data.headline.line1}
             line2={data.headline.line2}
@@ -24,19 +24,19 @@ export function HeroContent({ data }: HeroContentProps) {
           />
         </FadeIn>
 
-        <FadeIn delay={0.3}>
+        <FadeIn delay={0.1}>
           <HeroDescription description={data.description} />
         </FadeIn>
 
-        <FadeIn delay={0.4}>
+        <FadeIn delay={0.15}>
           <HeroCtaButtons buttons={data.ctaButtons} />
         </FadeIn>
 
-        <FadeIn delay={0.5}>
+        <FadeIn delay={0.2}>
           <EducationCard education={data.education} />
         </FadeIn>
 
-        <FadeIn delay={0.6}>
+        <FadeIn delay={0.25}>
           <DotPattern cols={3} count={6} className="w-10 mt-8" />
         </FadeIn>
       </div>

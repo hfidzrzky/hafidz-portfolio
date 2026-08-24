@@ -9,11 +9,15 @@ import './globals.css'
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+  preload: true,
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
+  preload: true,
 })
 
 export const viewport: Viewport = {
