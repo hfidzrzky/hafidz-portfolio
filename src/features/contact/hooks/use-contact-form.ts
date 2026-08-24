@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { ContactFormData, FormStatus } from '../types'
 
 const INITIAL_FORM_DATA: ContactFormData = {
@@ -14,6 +14,15 @@ export function useContactForm() {
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA)
   const [status, setStatus] = useState<FormStatus>('idle')
   const [emailError, setEmailError] = useState<string | null>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [])
 
   const validateEmail = (email: string): boolean => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -36,6 +45,8 @@ export function useContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    if (status === 'submitting') return
+
     if (!validateEmail(formData.email)) {
       setEmailError('Please enter a valid email address.')
       return
@@ -44,17 +55,26 @@ export function useContactForm() {
     setEmailError(null)
     setStatus('submitting')
 
-    setTimeout(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+    }
+
+    timerRef.current = setTimeout(() => {
       const isSuccess = Math.random() > 0.1
       if (isSuccess) {
         setStatus('success')
       } else {
         setStatus('error')
       }
+      timerRef.current = null
     }, 1500)
   }
 
   const handleReset = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
     setStatus('idle')
     setFormData(INITIAL_FORM_DATA)
     setEmailError(null)

@@ -90,7 +90,7 @@ export function StoryLightbox({
     }
   }, [isOpen, onClose, handlePrev, handleNext])
 
-  if (!isOpen || !isMounted) return null
+  if (!isMounted) return null
 
   const formattedCounter = `/ ${String(currentIndex + 1).padStart(2, '0')} — ${String(totalImages).padStart(2, '0')}`
 

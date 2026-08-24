@@ -25,50 +25,67 @@ function useIsMounted() {
 
 export function CertificateLightbox({ certificate, onClose }: CertificateLightboxProps) {
   const isMounted = useIsMounted()
+
+  if (!certificate || !isMounted) return null
+
+  return createPortal(
+    <CertificateLightboxModal
+      key={certificate.id}
+      certificate={certificate}
+      onClose={onClose}
+    />,
+    document.body
+  )
+}
+
+function subscribeDesktopMedia(callback: () => void) {
+  const mediaQuery = window.matchMedia('(min-width: 768px)')
+  mediaQuery.addEventListener('change', callback)
+  return () => mediaQuery.removeEventListener('change', callback)
+}
+
+function getDesktopSnapshot() {
+  return window.matchMedia('(min-width: 768px)').matches
+}
+
+function getDesktopServerSnapshot() {
+  return false
+}
+
+function CertificateLightboxModal({
+  certificate,
+  onClose,
+}: {
+  certificate: CertificateItem
+  onClose: () => void
+}) {
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktopMedia,
+    getDesktopSnapshot,
+    getDesktopServerSnapshot
+  )
   const [userViewMode, setUserViewMode] = useState<'pdf' | 'image' | null>(null)
-  const [prevCertId, setPrevCertId] = useState<string | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
   const [isPdfReady, setIsPdfReady] = useState(false)
   const [isPdfLoaded, setIsPdfLoaded] = useState(false)
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  if (certificate && certificate.id !== prevCertId) {
-    setPrevCertId(certificate.id)
-    setUserViewMode(null)
-  }
-
-  const defaultViewMode = certificate?.pdfUrl && !isMobile ? 'pdf' : 'image'
+  const defaultViewMode = certificate.pdfUrl && isDesktop ? 'pdf' : 'image'
   const viewMode = userViewMode ?? defaultViewMode
-  const currentPdfKey = `${certificate?.id || ''}-${viewMode}`
-  const [prevPdfKey, setPrevPdfKey] = useState<string>('')
-
-  if (currentPdfKey !== prevPdfKey) {
-    setPrevPdfKey(currentPdfKey)
-    setIsPdfReady(false)
-    setIsPdfLoaded(false)
-  }
 
   useEffect(() => {
-    if (!certificate || viewMode !== 'pdf') return
+    if (viewMode !== 'pdf') return
 
     const timer = setTimeout(() => {
       setIsPdfReady(true)
     }, 150)
 
-    return () => clearTimeout(timer)
-  }, [certificate, viewMode])
+    return () => {
+      clearTimeout(timer)
+      setIsPdfReady(false)
+      setIsPdfLoaded(false)
+    }
+  }, [viewMode])
 
   useEffect(() => {
-    if (!certificate) return
-
     const unlock = lockScroll()
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -83,9 +100,7 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
       unlock()
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [certificate, onClose])
-
-  if (!certificate || !isMounted) return null
+  }, [onClose])
 
   const rawImageUrl = certificate.imageUrl || ''
   const imageSrc =
@@ -110,7 +125,7 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
         certificate.credentialUrl.startsWith('https://'))
   )
 
-  return createPortal(
+  return (
     <div
       className="fixed inset-0 z-99999 flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/80 dark:bg-black/90 backdrop-blur-md animate-fadeIn select-none"
       onClick={onClose}
@@ -261,7 +276,6 @@ export function CertificateLightbox({ certificate, onClose }: CertificateLightbo
           </div>
         </div>
       </div>
-    </div>,
-    document.body
+    </div>
   )
 }

@@ -15,7 +15,7 @@ interface HeroVisualProps {
 
 export function HeroVisual({ portrait, cards }: HeroVisualProps) {
   return (
-    <div className="lg:col-span-6 relative flex justify-center items-center h-95 sm:h-120 lg:h-125 mt-8 lg:mt-0 w-full max-w-full overflow-hidden sm:overflow-visible transform-gpu">
+    <div className="order-1 lg:order-2 lg:col-span-6 relative flex justify-center items-center h-95 sm:h-120 lg:h-125 my-0 lg:my-0 w-full max-w-full overflow-hidden sm:overflow-visible transform-gpu">
       <HeroPortrait portrait={portrait} />
 
       <div className="absolute inset-0 z-20 w-full h-full pointer-events-none">

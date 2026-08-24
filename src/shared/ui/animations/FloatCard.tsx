@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
-import { useEffect, useState, ReactNode } from 'react'
+import { useEffect, ReactNode, useSyncExternalStore } from 'react'
 import { cn } from '@/shared/lib/utils'
 import { MOTION_EASINGS, MOTION_DURATIONS } from '@/shared/constants/motion'
 
@@ -13,6 +13,20 @@ export interface FloatCardProps {
   className?: string
 }
 
+function subscribeDesktopMedia(callback: () => void) {
+  const mediaQuery = window.matchMedia('(min-width: 768px)')
+  mediaQuery.addEventListener('change', callback)
+  return () => mediaQuery.removeEventListener('change', callback)
+}
+
+function getDesktopSnapshot() {
+  return window.matchMedia('(min-width: 768px)').matches
+}
+
+function getDesktopServerSnapshot() {
+  return false
+}
+
 export function FloatCard({
   children,
   depth = 1,
@@ -20,8 +34,11 @@ export function FloatCard({
   floatDuration = 5,
   className,
 }: FloatCardProps) {
-  const [isMobile, setIsMobile] = useState(false)
-  const [isAnimating, setIsAnimating] = useState(true)
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktopMedia,
+    getDesktopSnapshot,
+    getDesktopServerSnapshot
+  )
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -41,19 +58,12 @@ export function FloatCard({
   )
 
   useEffect(() => {
+    if (!isDesktop) return
+
     let ticking = false
     let rafId: number | null = null
 
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile, { passive: true })
-
     const handleMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth < 768) return
-
       if (!ticking) {
         rafId = window.requestAnimationFrame(() => {
           const x = e.clientX / window.innerWidth - 0.5
@@ -79,24 +89,21 @@ export function FloatCard({
       if (rafId !== null) {
         window.cancelAnimationFrame(rafId)
       }
-      window.removeEventListener('resize', checkMobile)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [mouseX, mouseY])
+  }, [isDesktop, mouseX, mouseY])
 
   return (
     <motion.div
       className={cn(
         'cursor-default origin-center pointer-events-auto transform-gpu',
-        isAnimating && 'will-change-[transform,opacity]',
         className
       )}
-      style={isMobile ? undefined : { x: translateX, y: translateY }}
+      style={isDesktop ? { x: translateX, y: translateY } : undefined}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '-50px' }}
-      onAnimationComplete={() => setIsAnimating(false)}
       transition={{
         opacity: {
           duration: MOTION_DURATIONS.default,
@@ -110,20 +117,18 @@ export function FloatCard({
         },
       }}
     >
-      <motion.div
-        animate={isMobile ? undefined : { y: [0, -6, 0] }}
-        transition={{
-          y: {
-            duration: floatDuration,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: floatDelay,
-          },
-        }}
-        className="transform-gpu"
+      <div
+        className={cn('transform-gpu', isDesktop && 'will-change-transform')}
+        style={
+          isDesktop
+            ? {
+                animation: `float ${floatDuration}s ease-in-out ${floatDelay}s infinite`,
+              }
+            : undefined
+        }
       >
         {children}
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
