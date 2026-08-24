@@ -30,22 +30,27 @@ export const viewport: Viewport = {
 }
 
 const siteUrl = 'https://muhammadhafidz-portfolio.vercel.app'
-const ogImageUrl = `${siteUrl}/images/hafidz-img.png`
+const ogImageUrl = `${siteUrl}/images/hafidz-img.webp`
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Muhammad Hafidz - Software Engineering In Progress',
+    default: 'Muhammad Hafidz | Software Engineer',
     template: '%s | Muhammad Hafidz',
   },
   description:
-    'Software Engineer & Informatics Student exploring systems by building real products, breaking things, and understanding what happens behind the interface.',
+    'Portfolio of Muhammad Hafidz, a Software Engineer and Informatics student specializing in building scalable web applications, modern architectures, and intuitive digital experiences.',
+  alternates: {
+    canonical: siteUrl,
+  },
   keywords: [
     'Muhammad Hafidz',
     'Hafidz',
     'Software Engineer',
     'Full Stack Developer',
     'Web Developer',
+    'Frontend Developer',
+    'Backend Developer',
     'Next.js',
     'React',
     'TypeScript',
@@ -66,25 +71,25 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    title: 'Muhammad Hafidz - Software Engineering In Progress',
+    title: 'Muhammad Hafidz | Software Engineer',
     description:
-      'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
-    siteName: 'Muhammad Hafidz Portfolio',
+      'Portfolio of Muhammad Hafidz, a Software Engineer and Informatics student specializing in building scalable web applications, modern architectures, and intuitive digital experiences.',
+    siteName: 'Muhammad Hafidz',
     images: [
       {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        type: 'image/png',
-        alt: 'Muhammad Hafidz - Software Engineering In Progress',
+        type: 'image/webp',
+        alt: 'Muhammad Hafidz - Software Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammad Hafidz - Software Engineering In Progress',
+    title: 'Muhammad Hafidz | Software Engineer',
     description:
-      'Exploring software engineering by building real products, breaking things, and understanding the systems behind them.',
+      'Portfolio of Muhammad Hafidz, a Software Engineer and Informatics student specializing in building scalable web applications, modern architectures, and intuitive digital experiences.',
     creator: '@hfidzrzky_',
     images: [ogImageUrl],
   },
@@ -101,6 +106,22 @@ export const metadata: Metadata = {
   },
 }
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Muhammad Hafidz',
+  url: siteUrl,
+  image: ogImageUrl,
+  jobTitle: 'Software Engineer',
+  sameAs: [
+    'https://github.com/hfidzrzky',
+    'https://linkedin.com/in/hfidzrzky',
+    'https://instagram.com/hfidzrzky_',
+  ],
+  description:
+    'Portfolio of Muhammad Hafidz, a Software Engineer and Informatics student specializing in building scalable web applications, modern architectures, and intuitive digital experiences.',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -113,6 +134,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body className="font-sans antialiased bg-light-bg text-slate-900 dark:bg-dark-bg dark:text-white min-h-screen selection:bg-accent selection:text-white transition-colors duration-300 overflow-x-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Providers>
           <Navbar />
           {children}
