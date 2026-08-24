@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     images: [ogImageUrl],
   },
   verification: {
-    google: 'pNEAUw_Arz7sz3rzch04ImCS44BMi08mR1LspSGRuEs',
+    google: 'ABw83q2K5hIDTiR1ti4ImKW5zzWc4me12LSeBkbomPo',
   },
   robots: {
     index: true,
