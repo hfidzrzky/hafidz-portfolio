@@ -29,11 +29,11 @@ export const heroMockData: HeroData = {
   education: {
     status: "Informatics Engineering Student",
     institution: "University of Technology Bandung",
-    logo: "/images/utb-logo.png",
+    logo: "/images/utb-logo.webp",
   },
 
   portrait: {
-    image: "/images/hafidz-img.png",
+    image: "/images/hafidz-img.webp",
   },
   
   cards: {

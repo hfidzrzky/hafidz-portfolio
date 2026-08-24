@@ -46,7 +46,7 @@ export function FeaturedCertificateCard({ certificate, onPreview }: FeaturedCert
               src={certificate.imageUrl}
               alt={certificate.imageAlt}
               fill
-              unoptimized
+              sizes="(max-width: 1024px) 100vw, 40vw"
               className="w-full h-full object-cover object-center grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
             />
 

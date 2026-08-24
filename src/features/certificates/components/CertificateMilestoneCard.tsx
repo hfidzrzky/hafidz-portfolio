@@ -37,7 +37,7 @@ export function CertificateMilestoneCard({ certificate, index, onPreview }: Cert
             src={certificate.imageUrl}
             alt={certificate.imageAlt}
             fill
-            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 origin-bottom"
           />
           {/* Zoom Overlay Hint */}

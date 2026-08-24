@@ -123,7 +123,6 @@ export function StoryImageSlider({
                 alt={`${imageAlt} - ${currentIndex + 1}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 58vw"
-                unoptimized
                 priority={currentIndex === 0}
                 className="object-cover filter grayscale-15% brightness-[0.9] dark:brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-100 dark:group-hover:brightness-95 group-hover:scale-[1.03] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu"
               />

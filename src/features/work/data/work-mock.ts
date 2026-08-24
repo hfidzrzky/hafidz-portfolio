@@ -15,7 +15,7 @@ export const workMockData: WorkData = {
   projects: [
     {
       id: 'sinemus-screen',
-      thumbnailImage: '/projects/screen-preview.png',
+      thumbnailImage: '/projects/screen-preview.webp',
       badgeText: 'Featured Product',
       category: 'Digital Product',
       timeframe: '2025 - NOW',
@@ -31,7 +31,7 @@ export const workMockData: WorkData = {
           'It has become one of the most substantial learning grounds in my journey as an engineer, combining modern web stacks with rigorous system design.',
         ],
         demoUrl: 'https://screen.sinemus.id/',
-        previewImage: '/projects/screen-preview.png',
+        previewImage: '/projects/screen-preview.webp',
         roleTitle: 'Product Engineer',
         roleDescription:
           'Working across product and engineering to turn ideas into a working digital experience.',
@@ -94,7 +94,7 @@ export const workMockData: WorkData = {
     },
     {
       id: 'sinemus-screen-v3',
-      thumbnailImage: '/projects/screen-v3-preview.png',
+      thumbnailImage: '/projects/screen-v3-preview.webp',
       badgeText: 'Flagship Platform',
       category: 'Digital Product & Core Tech',
       timeframe: '2026 - PRESENT',
@@ -111,7 +111,7 @@ export const workMockData: WorkData = {
           'This major overhaul eliminated legacy technical debt, optimized database queries with PostgreSQL, and established a robust CI/CD pipeline for frictionless deployment.',
         ],
         demoUrl: 'https://screen.sinemus.id/',
-        previewImage: '/projects/screen-v3-preview.png',
+        previewImage: '/projects/screen-v3-preview.webp',
         previewImageCaption: 'Interface preview captured from internal staging environment. UI components and state logic fully implemented; backend integration with NestJS & PostgreSQL currently in progress.',
 
         roleTitle: 'Lead Product Engineer & Core Architect',
@@ -187,7 +187,7 @@ export const workMockData: WorkData = {
     },
     {
       id: 'ilham-hakim-portfolio',
-      thumbnailImage: '/projects/portfolio-client.png',
+      thumbnailImage: '/projects/portfolio-client.webp',
       badgeText: 'Client Project',
       category: 'Motion & Web Experience',
       timeframe: '2026',
@@ -207,7 +207,7 @@ export const workMockData: WorkData = {
 
         // Dikarenakan privasi client & repo private
         demoUrl: '#',
-        previewImage: '/projects/portfolio-client.png',
+        previewImage: '/projects/portfolio-client.webp',
         previewImageCaption:
           'Static-first architecture powered by Next.js SSG with fluid Framer Motion animations.',
 

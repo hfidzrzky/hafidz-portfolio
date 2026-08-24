@@ -23,13 +23,13 @@ export const STORIES_MOCK_DATA: StoriesData = {
           title: ['Dicoding', 'Developer', 'Conference'],
           description:
             'A day spent learning beyond the screen, meeting new perspectives, and seeing the broader world of software engineering in a professional environment. It provided invaluable insights into industry-standard practices and networking opportunities with seasoned developers.',
-          imageUrl: '/stories/ddc-1.jpeg',
+          imageUrl: '/stories/ddc-1.webp',
           images: [
-            '/stories/ddc-1.jpeg',
-            '/stories/ddc-2.jpeg',
-            '/stories/ddc-3.jpeg',
-            '/stories/ddc-4.jpeg',
-            '/stories/ddc-5.jpeg',
+            '/stories/ddc-1.webp',
+            '/stories/ddc-2.webp',
+            '/stories/ddc-3.webp',
+            '/stories/ddc-4.webp',
+            '/stories/ddc-5.webp',
           ],
           imageAlt: 'Dicoding Developer Conference Event Photos',
           meta: {

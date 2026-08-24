@@ -180,7 +180,6 @@ export function StoryLightbox({
                     alt={`${imageAlt} - ${currentIndex + 1}`}
                     fill
                     priority
-                    unoptimized
                     className="object-contain"
                     sizes="100vw"
                   />

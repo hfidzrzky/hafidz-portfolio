@@ -28,7 +28,7 @@ export const certificatesMockData: CertificatesData = {
     category: 'METHODOLOGY',
     description:
       'Specialized certification in Spec-Driven Development (SDD), focusing on structured specification-first architecture, precision AI-assisted development workflows, and high-fidelity code standards.',
-    imageUrl: '/certificates/sdd-with-kiro.jpg',
+    imageUrl: '/certificates/sdd-with-kiro.webp',
     imageAlt: 'Spec-Driven Development with Kiro Certificate',
     credentialUrl: 'https://www.dicoding.com/certificates/ERZRLJ662ZYV',
     pdfUrl: '/certificates/pdf/sdd-with-kiro.pdf',
@@ -47,7 +47,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'CLOUD & GENAI',
       description:
         'Mastered cloud computing fundamentals, modern cloud service architecture, and generative AI integration within production web applications.',
-      imageUrl: '/certificates/belajar-dasar-cloud-genai.jpg',
+      imageUrl: '/certificates/belajar-dasar-cloud-genai.webp',
       imageAlt: 'Cloud & Generative AI Essentials Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/EYX4Q4MYWPDL',
       pdfUrl: '/certificates/pdf/belajar-dasar-cloud-genai.pdf',
@@ -64,7 +64,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'DEVOPS',
       description:
         'In-depth understanding of DevOps culture, automated CI/CD pipeline integration, containerization, and application infrastructure management.',
-      imageUrl: '/certificates/belajar-dasar-devops.jpg',
+      imageUrl: '/certificates/belajar-dasar-devops.webp',
       imageAlt: 'DevOps & CI/CD Fundamentals Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/ERZRLDKJOZYV',
       pdfUrl: '/certificates/pdf/belajar-dasar-devops.pdf',
@@ -81,7 +81,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'FRONTEND',
       description:
         'Built interactive web applications leveraging JavaScript DOM manipulation, event handling, and client-side data management using Web Storage API.',
-      imageUrl: '/certificates/belajar-membuat-frontend-web-pemula.jpg',
+      imageUrl: '/certificates/belajar-membuat-frontend-web-pemula.webp',
       imageAlt: 'Frontend Web Development Foundations Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/JMZVOLM3NXN9',
       pdfUrl: '/certificates/pdf/belajar-membuat-frontend-web-pemula.pdf',
@@ -98,7 +98,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'CORE LANGUAGE',
       description:
         'Comprehensive mastery of core JavaScript logic (ES6+), data structures, control flow, Object-Oriented Programming (OOP), and Asynchronous JS.',
-      imageUrl: '/certificates/belajar-dasar-pemrograman-javascript.jpg',
+      imageUrl: '/certificates/belajar-dasar-pemrograman-javascript.webp',
       imageAlt: 'JavaScript Programming Essentials Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/1RXYWQ43KZVM',
       pdfUrl: '/certificates/pdf/belajar-dasar-pemrograman-javascript.pdf',
@@ -115,7 +115,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'CORE LANGUAGE',
       description:
         'Fundamental and structured programming in Python, covering data structures, object-oriented concepts, modular code design, and computational logic.',
-      imageUrl: '/certificates/pemrograman-python-pemula.jpg',
+      imageUrl: '/certificates/pemrograman-python-pemula.webp',
       imageAlt: 'Python Programming Essentials Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/N9ZO03QLYXG5',
       pdfUrl: '/certificates/pdf/pemrograman-python-pemula.pdf',
@@ -132,7 +132,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'WEB FOUNDATION',
       description:
         'Fundamental web engineering standards using semantic HTML5 structure, modern CSS3 styling, Flexbox/Grid layouts, and Responsive Web Design.',
-      imageUrl: '/certificates/belajar-dasar-pemrorgaman-web.jpg',
+      imageUrl: '/certificates/belajar-dasar-pemrorgaman-web.webp',
       imageAlt: 'Web Development Standards & Design Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/RVZK0852QZD5',
       pdfUrl: '/certificates/pdf/belajar-dasar-pemrorgaman-web.pdf',
@@ -149,7 +149,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'AI FOUNDATION',
       description:
         'Core principles of Artificial Intelligence, Machine Learning workflows, neural network architectures, and ethical AI solution design.',
-      imageUrl: '/certificates/belajar-dasar-ai.jpg',
+      imageUrl: '/certificates/belajar-dasar-ai.webp',
       imageAlt: 'Artificial Intelligence Fundamentals Certificate',
       credentialUrl: 'https://www.dicoding.com/certificates/GRX5WJJNKZ0M',
       pdfUrl: '/certificates/pdf/belajar-dasar-ai.pdf',
@@ -166,7 +166,7 @@ export const certificatesMockData: CertificatesData = {
       category: 'EVENT',
       description:
         'Participated in national developer keynotes covering modern web ecosystem evolution, micro-frontends, and AI engineering trends.',
-      imageUrl: '/certificates/dicoding-developer-conference.jpg',
+      imageUrl: '/certificates/dicoding-developer-conference.webp',
       imageAlt: 'Dicoding Developer Conference Certificate',
       tags: ['TECH EVENT', 'SOFTWARE TRENDS', 'COMMUNITY'],
       isVerified: true,
