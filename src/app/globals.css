@@ -14,11 +14,6 @@ html {
   }
 }
 
-.section-content-visibility {
-  contain: layout style;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
-}
 
 @theme {
   --color-dark-bg: #080B12;
