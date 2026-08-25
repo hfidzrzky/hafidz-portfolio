@@ -14,7 +14,8 @@ export function ContactContent() {
   const {
     formData,
     status,
-    emailError,
+    fieldErrors,
+    serverErrorMessage,
     handleInputChange,
     handleSubmit,
     handleReset,
@@ -50,7 +51,8 @@ export function ContactContent() {
                 <ContactForm
                   formData={formData}
                   status={status}
-                  emailError={emailError}
+                  fieldErrors={fieldErrors}
+                  serverErrorMessage={serverErrorMessage}
                   subjectOptions={CONTACT_DATA.subjectOptions}
                   onChange={handleInputChange}
                   onSubmit={handleSubmit}

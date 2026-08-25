@@ -7,7 +7,8 @@ import { ArrowRight, Loader2 } from 'lucide-react'
 interface ContactFormProps {
   formData: ContactFormData
   status: FormStatus
-  emailError: string | null
+  fieldErrors: Partial<Record<keyof ContactFormData, string>>
+  serverErrorMessage?: string | null
   subjectOptions: SubjectOption[]
   onChange: (field: keyof ContactFormData, value: string) => void
   onSubmit: (e: React.FormEvent) => void
@@ -16,7 +17,8 @@ interface ContactFormProps {
 export function ContactForm({
   formData,
   status,
-  emailError,
+  fieldErrors,
+  serverErrorMessage,
   subjectOptions,
   onChange,
   onSubmit,
@@ -28,6 +30,30 @@ export function ContactForm({
       onSubmit={onSubmit}
       className="flex flex-col gap-10 transition-opacity duration-300"
     >
+      {/* Honeypot field (hidden from screen readers & users to trap bots) */}
+      <div
+        className="absolute -left-[9999px] opacity-0 pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <label htmlFor="hp_field">Leave this empty</label>
+        <input
+          type="text"
+          id="hp_field"
+          name="hp_field"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.hp_field || ''}
+          onChange={(e) => onChange('hp_field', e.target.value)}
+        />
+      </div>
+
+      {serverErrorMessage && (
+        <div className="p-4 border border-red-500/30 bg-red-500/10 text-red-500 dark:text-red-400 font-mono text-xs">
+          {serverErrorMessage}
+        </div>
+      )}
+
+      {/* Field 01: Name */}
       <div className="group relative">
         <label
           htmlFor="name"
@@ -45,8 +71,14 @@ export function ContactForm({
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
         />
         <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
+        {fieldErrors.name && (
+          <div className="text-red-500 dark:text-red-400 font-mono text-[10px] mt-2">
+            {fieldErrors.name}
+          </div>
+        )}
       </div>
 
+      {/* Field 02: Email */}
       <div className="group relative">
         <label
           htmlFor="email"
@@ -64,13 +96,14 @@ export function ContactForm({
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
         />
         <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
-        {emailError && (
+        {fieldErrors.email && (
           <div className="text-red-500 dark:text-red-400 font-mono text-[10px] mt-2">
-            {emailError}
+            {fieldErrors.email}
           </div>
         )}
       </div>
 
+      {/* Field 03: Subject */}
       <div className="group relative">
         <label
           htmlFor="subject"
@@ -80,6 +113,7 @@ export function ContactForm({
         </label>
         <select
           id="subject"
+          required
           value={formData.subject}
           onChange={(e) => onChange('subject', e.target.value)}
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white focus:outline-none focus:border-accent transition-colors cursor-pointer appearance-none"
@@ -98,8 +132,14 @@ export function ContactForm({
           ))}
         </select>
         <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
+        {fieldErrors.subject && (
+          <div className="text-red-500 dark:text-red-400 font-mono text-[10px] mt-2">
+            {fieldErrors.subject}
+          </div>
+        )}
       </div>
 
+      {/* Field 04: Message */}
       <div className="group relative">
         <label
           htmlFor="message"
@@ -117,6 +157,11 @@ export function ContactForm({
           className="w-full bg-transparent border-b border-light-border dark:border-dark-border py-3 font-mono text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-accent transition-colors resize-y min-h-35"
         />
         <span className="absolute bottom-0 left-0 w-0 h-px bg-accent transition-all duration-300 group-focus-within:w-full" />
+        {fieldErrors.message && (
+          <div className="text-red-500 dark:text-red-400 font-mono text-[10px] mt-2">
+            {fieldErrors.message}
+          </div>
+        )}
       </div>
 
       <div className="pt-4">

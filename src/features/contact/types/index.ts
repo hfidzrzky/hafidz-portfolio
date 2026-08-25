@@ -1,3 +1,5 @@
+import { ContactFormInput } from '../schemas/contact.schema'
+
 export type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 export interface SocialLink {
@@ -30,15 +32,12 @@ export interface ContactInfoData {
   availabilityText: string
 }
 
-export interface ContactFormData {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+export type ContactFormData = ContactFormInput
 
 export interface ContactData {
   header: ContactHeaderData
   info: ContactInfoData
   subjectOptions: SubjectOption[]
 }
+
+export type { ContactFormInput, ContactActionResult } from '../schemas/contact.schema'

@@ -2,44 +2,48 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { ContactFormData, FormStatus } from '../types'
+import { sendContactEmail } from '../actions/send-contact-email'
+import { contactFormSchema } from '../schemas/contact.schema'
 
 const INITIAL_FORM_DATA: ContactFormData = {
   name: '',
   email: '',
   subject: '',
   message: '',
+  hp_field: '',
 }
 
 export function useContactForm() {
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA)
   const [status, setStatus] = useState<FormStatus>('idle')
-  const [emailError, setEmailError] = useState<string | null>(null)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<keyof ContactFormData, string>>
+  >({})
+  const [serverErrorMessage, setServerErrorMessage] = useState<string | null>(
+    null
+  )
+
+  // Track initial mount time via ref for bot timing trap (initialized in effect for React purity)
+  const renderedAtRef = useRef<number | null>(null)
 
   useEffect(() => {
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current)
-      }
-    }
+    renderedAtRef.current = Date.now()
   }, [])
-
-  const validateEmail = (email: string): boolean => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return regex.test(email.trim())
-  }
 
   const handleInputChange = useCallback(
     (field: keyof ContactFormData, value: string) => {
       setFormData((prev) => ({ ...prev, [field]: value }))
 
-      if (field === 'email') {
-        if (emailError && validateEmail(value)) {
-          setEmailError(null)
-        }
+      // Clear field-specific error upon typing
+      if (fieldErrors[field]) {
+        setFieldErrors((prev) => {
+          const updated = { ...prev }
+          delete updated[field]
+          return updated
+        })
       }
     },
-    [emailError]
+    [fieldErrors]
   )
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,43 +51,66 @@ export function useContactForm() {
 
     if (status === 'submitting') return
 
-    if (!validateEmail(formData.email)) {
-      setEmailError('Please enter a valid email address.')
+    const payload: ContactFormData = {
+      ...formData,
+      renderedAt: renderedAtRef.current ?? undefined,
+    }
+
+    // 1. Client-side validation for instant UX feedback
+    const validationResult = contactFormSchema.safeParse(payload)
+
+    if (!validationResult.success) {
+      const flattened = validationResult.error.flatten().fieldErrors
+      const errors: Partial<Record<keyof ContactFormData, string>> = {}
+      for (const [key, messages] of Object.entries(flattened)) {
+        if (messages && messages.length > 0) {
+          errors[key as keyof ContactFormData] = messages[0]
+        }
+      }
+      setFieldErrors(errors)
       return
     }
 
-    setEmailError(null)
+    setFieldErrors({})
+    setServerErrorMessage(null)
     setStatus('submitting')
 
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-    }
+    try {
+      // 2. Call Next.js Server Action
+      const response = await sendContactEmail(payload)
 
-    timerRef.current = setTimeout(() => {
-      const isSuccess = Math.random() > 0.1
-      if (isSuccess) {
+      if (response.success) {
         setStatus('success')
+        setFormData(INITIAL_FORM_DATA)
+        renderedAtRef.current = Date.now()
       } else {
         setStatus('error')
+        setServerErrorMessage(
+          response.message || 'Failed to send message. Please try again later.'
+        )
       }
-      timerRef.current = null
-    }, 1500)
+    } catch (err) {
+      console.error('[Contact Form Hook] Submit Error:', err)
+      setStatus('error')
+      setServerErrorMessage(
+        'An unexpected network error occurred. Please try again.'
+      )
+    }
   }
 
   const handleReset = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-      timerRef.current = null
-    }
     setStatus('idle')
     setFormData(INITIAL_FORM_DATA)
-    setEmailError(null)
+    renderedAtRef.current = Date.now()
+    setFieldErrors({})
+    setServerErrorMessage(null)
   }, [])
 
   return {
     formData,
     status,
-    emailError,
+    fieldErrors,
+    serverErrorMessage,
     handleInputChange,
     handleSubmit,
     handleReset,
